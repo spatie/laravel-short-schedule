@@ -3,6 +3,7 @@
 namespace Spatie\ShortSchedule\Commands;
 
 use Illuminate\Console\Command;
+use React\EventLoop\Factory;
 use Spatie\ShortSchedule\ShortSchedule;
 
 class ShortScheduleRunCommand extends Command
@@ -13,6 +14,8 @@ class ShortScheduleRunCommand extends Command
 
     public function handle()
     {
-        (new ShortSchedule())->registerCommands()->start();
+        $loop = Factory::create();
+
+        (new ShortSchedule($loop))->registerCommands()->start();
     }
 }

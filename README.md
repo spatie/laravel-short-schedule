@@ -15,7 +15,6 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
     $shortSchedule->command('artisan-command')->everySecond();
 }
 ```
- 
 
 ## Support us
 
@@ -52,14 +51,14 @@ In `app\Console\Kernel` you should add a method named `shortSchedule`.
 
 protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSchedule)
 {
-    // this command will run every second
+    // this artisan command will run every second
     $shortSchedule->command('artisan-command')->everySecond();
 }
 ```
 
 ### Specify the amount of seconds
 
-This is how you can run a command every single second
+You an artisan command every single second like this:
 
 ```php
 $shortSchedule->command('artisan-command')->everySecond();
@@ -68,16 +67,74 @@ $shortSchedule->command('artisan-command')->everySecond();
 You can specify a specific amount of seconds using `everySeconds`
 
 ```php
-$shortSchedule->command('artisan-command')->everySeconds();
+$shortSchedule->command('artisan-command')->everySeconds(30);
+```
+
+ ### Scheduling shell commands
+ 
+ Use `exec` to schedule a bash command.
+ 
+```php
+$shortSchedule->bash('bash-command')->everySecond();
 ```
  
  ### Preventing overlaps
  
- // TO DO
+ By default, a scheduled command will run, even if the previous invocation is still running.
  
- ### Scheduling closures
+ You can prevent that by tacking on `withoutOverlapping`
  
- // TO DO
+```php
+$shortSchedule->command('artisan-command')->everySecond()->withoutOverlapping();
+```
+ 
+ ### Between time constraints
+ 
+ Limit the task to run between start and end times.
+ 
+ ```php
+ $shortSchedule->command('artisan-command')->between('09:00', '17:00')->everySecond();
+ ```
+
+It is safe use overflow days. In this example the command will run on every second between 21:00 and 01:00
+
+ ```php
+ $shortSchedule->command('artisan-command')->between('21:00', '01:00')->everySecond();
+ ```
+ 
+ ### Truth test constraints
+ 
+ The command will run if the given closure return a truthy value. The closure will be evaluated at the same frequency the command is scheduled. So if you schedule the command to run every second, the given closure will also run every second.
+ 
+```php
+$shortSchedule->command('artisan-command')->when(fn() => rand() %2)->everySecond();
+```
+
+ ### Environment constraints
+ 
+ The command will only run on the given environment.
+ 
+ ```php
+ $shortSchedule->command('artisan-command')->environment('production')->everySecond();
+ ```
+
+You can also pass an array:
+
+ ```php
+ $shortSchedule->command('artisan-command')->environment(['staging', 'production'])->everySecond();
+ ```
+
+### Composite constraints
+
+You can use all constraints mentioned above at once. The command will only execute if all the used constraints pass.
+
+ ```php
+ $shortSchedule
+   ->command('artisan-command')
+   ->between('09:00', '17:00')
+   ->when($callable)
+   ->everySecond();
+ ```
 
 ## Testing
 
