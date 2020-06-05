@@ -16,8 +16,7 @@ class ExampleTest extends TestCase
         });
 
         $loop->futureTick(function () use ($loop) {
-            //$loop->stop();
-            dump('here');
+            $loop->stop();
         });
 
         $loop->run();
