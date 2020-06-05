@@ -90,6 +90,5 @@ class ShortSchedule
 
     protected function shouldRun()
     {
-
     }
 }
