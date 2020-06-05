@@ -17,6 +17,11 @@ class PendingShortScheduleCommand
 
     public function everySecond(int $frequencyInSeconds = 1): self
     {
+        return $this->everySeconds($frequencyInSeconds);
+    }
+
+    public function everySeconds(int $frequencyInSeconds = 1): self
+    {
         $this->frequencyInSeconds = $frequencyInSeconds;
 
         return $this;
