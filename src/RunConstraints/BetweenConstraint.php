@@ -6,9 +6,9 @@ use Carbon\Carbon;
 
 class BetweenConstraint implements RunConstraint
 {
-    private string $startTime;
+    protected string $startTime;
 
-    private string $endTime;
+    protected string $endTime;
 
     public function __construct(string $startTime, string $endTime)
     {

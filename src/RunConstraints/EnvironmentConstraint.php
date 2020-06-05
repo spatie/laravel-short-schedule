@@ -4,7 +4,7 @@ namespace Spatie\ShortSchedule\RunConstraints;
 
 class EnvironmentConstraint implements RunConstraint
 {
-    private array $allowedEnvironments;
+    protected array $allowedEnvironments;
 
     public function __construct(array $allowedEnvironments)
     {

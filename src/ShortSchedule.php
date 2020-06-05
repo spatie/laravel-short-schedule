@@ -8,9 +8,9 @@ use ReflectionClass;
 
 class ShortSchedule
 {
-    private LoopInterface $loop;
+    protected LoopInterface $loop;
 
-    private array $pendingCommands = [];
+    protected array $pendingCommands = [];
 
     public function __construct(LoopInterface $loop)
     {
