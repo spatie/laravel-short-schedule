@@ -143,6 +143,10 @@ You can use all constraints mentioned above at once. The command will only execu
    ->everySecond();
  ```
 
+## Events
+
+TODO:
+
 ## Testing
 
 ``` bash
