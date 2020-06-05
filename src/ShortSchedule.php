@@ -5,16 +5,12 @@ namespace Spatie\ShortSchedule;
 use App\Console\Kernel;
 use React\EventLoop\LoopInterface;
 use ReflectionClass;
-use Spatie\ShortSchedule\Events\ShortScheduledTaskStarting;
-use Symfony\Component\Process\Process;
 
 class ShortSchedule
 {
     private LoopInterface $loop;
 
-    private array $commands = [];
-
-    private array $processes = [];
+    private array $pendingCommands = [];
 
     public function __construct(LoopInterface $loop)
     {
@@ -40,7 +36,7 @@ class ShortSchedule
     {
         $pendingCommand = (new PendingShortScheduleCommand())->command($command);
 
-        $this->commands[] = $pendingCommand;
+        $this->pendingCommands[] = $pendingCommand;
 
         return $pendingCommand;
     }
@@ -49,47 +45,32 @@ class ShortSchedule
     {
         $pendingCommand = (new PendingShortScheduleCommand())->exec($command);
 
-        $this->commands[] = $pendingCommand;
+        $this->pendingCommands[] = $pendingCommand;
 
         return $pendingCommand;
     }
 
     public function start(): void
     {
-        collect($this->commands)->each(function (PendingShortScheduleCommand $shortScheduledCommand) {
-            $this->registerCommand($shortScheduledCommand);
-        });
+        collect($this->pendingCommands)
+            ->map(function (PendingShortScheduleCommand $pendingCommand) {
+                return new ShortScheduleCommand($pendingCommand);
+            })
+            ->each(function (ShortScheduleCommand $command) {
+                $this->registerCommand($command);
+            });
 
         $this->loop->run();
     }
 
-    protected function registerCommand(PendingShortScheduleCommand $shortScheduledCommand): void
+    protected function registerCommand(ShortScheduleCommand $command): void
     {
-        $this->loop->addPeriodicTimer($shortScheduledCommand->frequencyInSeconds, function () use ($shortScheduledCommand) {
-            $commandString = $shortScheduledCommand->command;
-
-            if (isset($this->processes[$commandString])) {
-                if ($this->processes[$commandString]->isRunning() && ! $shortScheduledCommand->allowOverlaps) {
-                    return;
-                }
-            }
-
-            if (! $shortScheduledCommand->shouldRun()) {
+        $this->loop->addPeriodicTimer($command->frequencyInSeconds(),  function () use ($command) {
+            if (! $command->shouldRun()) {
                 return;
             }
 
-            $process = Process::fromShellCommandline($commandString);
-
-            event(new ShortScheduledTaskStarting($commandString, $process));
-            $process->start();
-            event(new ShortScheduledTaskStarting($commandString, $process));
-
-            $this->processes[$commandString] = $process;
+            $command->run();
         });
-    }
-
-    protected function shouldRun()
-    {
-
     }
 }

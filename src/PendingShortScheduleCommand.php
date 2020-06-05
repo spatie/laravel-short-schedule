@@ -10,13 +10,13 @@ use Spatie\ShortSchedule\RunConstraints\WhenConstraint;
 
 class PendingShortScheduleCommand
 {
-    public string $command = '';
+    protected string $command = '';
 
-    public int $frequencyInSeconds = 1;
+    protected int $frequencyInSeconds = 1;
 
-    public bool $allowOverlaps = true;
+    protected bool $allowsOverlaps = true;
 
-    public array $constraints = [];
+    protected array $constraints = [];
 
     public function everySecond(int $frequencyInSeconds = 1): self
     {
@@ -44,7 +44,7 @@ class PendingShortScheduleCommand
 
     public function withoutOverlapping(): self
     {
-        $this->allowOverlaps = false;
+        $this->allowsOverlaps = false;
 
         return $this;
     }
