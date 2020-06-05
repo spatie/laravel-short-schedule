@@ -10,8 +10,6 @@ class FeatureTest extends TestCase
     /** @test */
     public function this_is_a_feature()
     {
-
-
         (new ShortSchedule($loop))->registerCommands()->start();
     }
 }
