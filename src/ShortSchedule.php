@@ -42,21 +42,21 @@ class ShortSchedule
     {
         $loop = Factory::create();
 
-        collect($this->commands)->each(function (PendingShortScheduleCommand $command) use ($loop) {
-            $loop->addPeriodicTimer($command->frequencyInSeconds, function () use ($command) {
-                $commandString = $command->command;
+        collect($this->commands)->each(function (PendingShortScheduleCommand $shortScheduledCommand) use ($loop) {
+            $loop->addPeriodicTimer($shortScheduledCommand->frequencyInSeconds, function () use ($shortScheduledCommand) {
+                $commandString = $shortScheduledCommand->command;
 
                 if (isset($this->processes[$commandString])) {
-                    if ($this->processes[$commandString]->isRunning() && ! $command->allowOverlaps) {
+                    if ($this->processes[$commandString]->isRunning() && ! $shortScheduledCommand->allowOverlaps) {
                         return;
                     }
                 }
 
                 $process = Process::fromShellCommandline("php artisan {$commandString}");
 
-                event(new ShortScheduledTaskStarting($command, $process));
+                event(new ShortScheduledTaskStarting($commandString, $process));
                 $process->start();
-                event(new ShortScheduledTaskStarting($command, $process));
+                event(new ShortScheduledTaskStarting($commandString, $process));
 
                 $this->processes[$commandString] = $process;
             });

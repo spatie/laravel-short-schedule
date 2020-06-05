@@ -2,8 +2,8 @@
 
 namespace Spatie\ShortSchedule\Commands;
 
-use App\ShortSchedule;
 use Illuminate\Console\Command;
+use Spatie\ShortSchedule\ShortSchedule;
 
 class ShortScheduleRunCommand extends Command
 {
