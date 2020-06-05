@@ -23,7 +23,7 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
 
     public function shouldRun(): bool
     {
-        if ($this->isRunning() && $this->pendingShortScheduleCommand->allowsOverlaps) {
+        if ($this->isRunning() && ! $this->pendingShortScheduleCommand->allowsOverlaps) {
             return false;
         }
 
