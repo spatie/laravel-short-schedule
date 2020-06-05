@@ -23,13 +23,13 @@ class ShortSchedule
 
     public function registerCommands(): self
     {
-        $class = new ReflectionClass(Kernel::class);
+        $kernel = app(Kernel::class);
+
+        $class = new ReflectionClass(get_class($kernel));
 
         $shortScheduleMethod = $class->getMethod('shortSchedule');
 
         $shortScheduleMethod->setAccessible(true);
-
-        $kernel = app(Kernel::class);
 
         $shortScheduleMethod->invokeArgs($kernel, [$this]);
 
@@ -57,29 +57,39 @@ class ShortSchedule
     public function start(): void
     {
         collect($this->commands)->each(function (PendingShortScheduleCommand $shortScheduledCommand) {
-            $this->loop->addPeriodicTimer($shortScheduledCommand->frequencyInSeconds, function () use ($shortScheduledCommand) {
-                $commandString = $shortScheduledCommand->command;
-
-                if (isset($this->processes[$commandString])) {
-                    if ($this->processes[$commandString]->isRunning() && ! $shortScheduledCommand->allowOverlaps) {
-                        return;
-                    }
-                }
-
-                if (! $shortScheduledCommand->shouldRun()) {
-                    return;
-                }
-
-                $process = Process::fromShellCommandline("php artisan {$commandString}");
-
-                event(new ShortScheduledTaskStarting($commandString, $process));
-                $process->start();
-                event(new ShortScheduledTaskStarting($commandString, $process));
-
-                $this->processes[$commandString] = $process;
-            });
+            $this->registerCommand($shortScheduledCommand);
         });
 
         $this->loop->run();
+    }
+
+    protected function registerCommand(PendingShortScheduleCommand $shortScheduledCommand): void
+    {
+        $this->loop->addPeriodicTimer($shortScheduledCommand->frequencyInSeconds, function () use ($shortScheduledCommand) {
+            $commandString = $shortScheduledCommand->command;
+
+            if (isset($this->processes[$commandString])) {
+                if ($this->processes[$commandString]->isRunning() && ! $shortScheduledCommand->allowOverlaps) {
+                    return;
+                }
+            }
+
+            if (! $shortScheduledCommand->shouldRun()) {
+                return;
+            }
+
+            $process = Process::fromShellCommandline($commandString);
+
+            event(new ShortScheduledTaskStarting($commandString, $process));
+            $process->start();
+            event(new ShortScheduledTaskStarting($commandString, $process));
+
+            $this->processes[$commandString] = $process;
+        });
+    }
+
+    protected function shouldRun()
+    {
+
     }
 }
