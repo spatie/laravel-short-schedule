@@ -2,6 +2,7 @@
 
 namespace Spatie\ShortSchedule;
 
+use Closure;
 use Illuminate\Support\Arr;
 use Spatie\ShortSchedule\RunConstraints\BetweenConstraint;
 use Spatie\ShortSchedule\RunConstraints\EnvironmentConstraint;
@@ -80,9 +81,9 @@ class PendingShortScheduleCommand
         return $this;
     }
 
-    public function when(callable $callable): self
+    public function when(Closure $closure): self
     {
-        $this->constraints[] = new WhenConstraint($callable);
+        $this->constraints[] = new WhenConstraint($closure);
 
         return $this;
     }

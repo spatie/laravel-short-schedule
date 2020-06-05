@@ -23,7 +23,7 @@ class BetweenConstraint implements RunConstraint
 
         $endTime = Carbon::createFromFormat('H:i', $this->endTime)->startOfMinute();
 
-        if ($endTime->isBefore($startTime) && now()->setTimeFromTimeString($startTime)->isFuture()) {
+        if ($endTime->isBefore($startTime) && now()->setTimeFromTimeString($this->startTime)->isFuture()) {
             $startTime->subDay();
         }
 
