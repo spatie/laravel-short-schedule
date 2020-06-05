@@ -4,8 +4,18 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/laravel-short-schedule/run-tests?label=tests)](https://github.com/spatie/laravel-short-schedule/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-short-schedule.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-short-schedule)
 
+Using [Laravel's native scheduler](https://laravel.com/docs/master/scheduling) you can schedule artisan commands to run every minute at the lowest. 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+```php
+// in app\Console\Kernel.php
+
+protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSchedule)
+{
+    // this command will run every second
+    $shortSchedule->command('artisan-command')->everySecond();
+}
+```
+ 
 
 ## Support us
 
@@ -22,34 +32,52 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require spatie/package-skeleton-laravel
+composer require spatie/laravel-short-schedule
 ```
 
-You can publish and run the migrations with:
+In your production environment you can start the short scheduler with this command
 
 ```bash
-php artisan vendor:publish --provider="Spatie\Skeleton\SkeletonServiceProvider" --tag="migrations"
-php artisan migrate
+php artisan short-schedule:run
 ```
 
-You can publish the config file with:
-```bash
-php artisan vendor:publish --provider="Spatie\Skeleton\SkeletonServiceProvider" --tag="config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
+You should use a process monitor like [Supervisor](http://supervisord.org/index.html) to keep this task going at all times, and to automatically start it when your server boots. Whenever you change the schedule, you should restart this command.
 
 ## Usage
 
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+In `app\Console\Kernel` you should add a method named `shortSchedule`.
+
+```php
+// in app\Console\Kernel.php
+
+protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSchedule)
+{
+    // this command will run every second
+    $shortSchedule->command('artisan-command')->everySecond();
+}
 ```
+
+### Specify the amount of seconds
+
+This is how you can run a command every single second
+
+```php
+$shortSchedule->command('artisan-command')->everySecond();
+```
+
+You can specify a specific amount of seconds using `everySeconds`
+
+```php
+$shortSchedule->command('artisan-command')->everySeconds();
+```
+ 
+ ### Preventing overlaps
+ 
+ // TO DO
+ 
+ ### Scheduling closures
+ 
+ // TO DO
 
 ## Testing
 
