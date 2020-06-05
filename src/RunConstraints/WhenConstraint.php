@@ -2,20 +2,21 @@
 
 namespace Spatie\ShortSchedule\RunConstraints;
 
+use Closure;
+
 class WhenConstraint implements RunConstraint
 {
-    /** @var callable */
-    protected $callable;
+    protected Closure $closure;
 
-    public function __construct(callable $callable)
+    public function __construct(Closure $closure)
     {
-        $this->callable = $callable;
+        $this->closure = $closure;
     }
 
     public function shouldRun(): bool
     {
-        $callable = $this->callable;
+        $closure = $this->closure;
 
-        return (bool)$callable();
+        return (bool)$closure();
     }
 }
