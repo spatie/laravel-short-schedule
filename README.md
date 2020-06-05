@@ -6,7 +6,9 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/laravel-short-schedule/run-tests?label=tests)](https://github.com/spatie/laravel-short-schedule/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-short-schedule.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-short-schedule)
 
-Using [Laravel's native scheduler](https://laravel.com/docs/master/scheduling) you can schedule artisan commands to run every minute at the lowest. 
+[Laravel's native scheduler](https://laravel.com/docs/master/scheduling) allows you to schedule Artisan commands to run every minute. 
+
+If you need to execute something with a higher frequency, for example every second, than you've come to the right package. With laravel-short-schedule installed, you can do this
 
 ```php
 // in app\Console\Kernel.php
@@ -15,6 +17,9 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
 {
     // this command will run every second
     $shortSchedule->command('artisan-command')->everySecond();
+    
+    // this command will run every 30 seconds
+    $shortSchedule->command('another-artisan-command')->everySeconds(30);
 }
 ```
 
