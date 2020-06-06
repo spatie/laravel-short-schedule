@@ -40,6 +40,8 @@ class PendingShortScheduleCommand
 
     public function exec(string $command): self
     {
+        $this->command = $command;
+
         return $this;
     }
 

@@ -2,12 +2,15 @@
 
 namespace Spatie\ShortSchedule;
 
-use App\Console\Kernel;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Traits\Macroable;
 use React\EventLoop\LoopInterface;
 use ReflectionClass;
 
 class ShortSchedule
 {
+    use Macroable;
+
     protected LoopInterface $loop;
 
     protected array $pendingCommands = [];
@@ -66,6 +69,7 @@ class ShortSchedule
     protected function registerCommand(ShortScheduleCommand $command): void
     {
         $this->loop->addPeriodicTimer($command->frequencyInSeconds(),  function () use ($command) {
+
             if (! $command->shouldRun()) {
                 return;
             }
