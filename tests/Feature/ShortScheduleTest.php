@@ -15,9 +15,9 @@ class ShortScheduleTest extends TestCase
 
         $tempFilePath = $this->getTempFilePath("test.txt");
 
-        TestKernel::registerShortScheduleCommand(function (ShortSchedule $shortSchedule) use ($tempFilePath) {
-            $shortSchedule->exec("touch '{$tempFilePath}'")->everySeconds(0.01);
-        });
+        TestKernel::registerShortScheduleCommand(
+            fn (ShortSchedule $shortSchedule) => $shortSchedule->exec("touch '{$tempFilePath}'")->everySeconds(0.01)
+        );
 
         (new ShortSchedule($loop))->registerCommands()->start();
 
