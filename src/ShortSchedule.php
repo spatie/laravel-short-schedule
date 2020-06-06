@@ -69,7 +69,6 @@ class ShortSchedule
     protected function registerCommand(ShortScheduleCommand $command): void
     {
         $this->loop->addPeriodicTimer($command->frequencyInSeconds(),  function () use ($command) {
-
             if (! $command->shouldRun()) {
                 return;
             }
