@@ -19,6 +19,9 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
     
     // this command will run every 30 seconds
     $shortSchedule->command('another-artisan-command')->everySeconds(30);
+    
+    // this command will run every half a second
+    $shortSchedule->command('another-artisan-command')->everySeconds(0.5);
 }
 ```
 
