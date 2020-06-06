@@ -44,7 +44,7 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
         return $this->process->isRunning();
     }
 
-    public function run()
+    public function run(): void
     {
         $commandString = $this->pendingShortScheduleCommand->command;
         $this->process = Process::fromShellCommandline($this->pendingShortScheduleCommand->command);
