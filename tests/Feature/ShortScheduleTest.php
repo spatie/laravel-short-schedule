@@ -51,6 +51,32 @@ class ShortScheduleTest extends TestCase
             ->assertTempFileContains('called', 2);
     }
 
+    /** @test */
+    public function it_can_use_constraints()
+    {
+        TestKernel::registerShortScheduleCommand(
+            fn (ShortSchedule $shortSchedule) => $shortSchedule
+                ->exec("echo 'called' >> '{$this->getTempFilePath()}'")
+                ->everySeconds(0.1)
+                ->when(fn () => false)
+        );
+
+        $this
+            ->startAndStopShortScheduleAfterSeconds(0.19)
+            ->assertTempFileContains('called', 0);
+
+        TestKernel::registerShortScheduleCommand(
+            fn (ShortSchedule $shortSchedule) => $shortSchedule
+                ->exec("echo 'called' >> '{$this->getTempFilePath()}'")
+                ->everySeconds(0.1)
+                ->when(fn () => true)
+        );
+
+        $this
+            ->startAndStopShortScheduleAfterSeconds(0.19)
+            ->assertTempFileContains('called', 1);
+    }
+
     protected function startAndStopShortScheduleAfterSeconds(float $seconds): self
     {
         $loop = $this->getLoopThatStopsAfterSeconds($seconds);

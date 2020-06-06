@@ -57,9 +57,9 @@ class TestCase extends Orchestra
 
     protected function assertTempFileContains(string $needle, int $expectedCount): self
     {
-        $this->assertFileExists($this->getTempFilePath(), "Temp file does not exist");
-
-        $haystack = file_get_contents($this->getTempFilePath());
+        $haystack = file_exists($this->getTempFilePath())
+            ? file_get_contents($this->getTempFilePath())
+            : '';
 
         $actualCount = substr_count($haystack, $needle);
 
