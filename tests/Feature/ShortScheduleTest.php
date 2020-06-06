@@ -11,17 +11,44 @@ class ShortScheduleTest extends TestCase
     /** @test */
     public function it_can_schedule_commands_in_the_kernel()
     {
-        $tempFilePath = $this->getTempFilePath("test.txt");
-
         TestKernel::registerShortScheduleCommand(
             fn (ShortSchedule $shortSchedule) => $shortSchedule
-                ->exec("echo 'called' >> '{$tempFilePath}'")
+                ->exec("echo 'called' >> '{$this->getTempFilePath()}'")
+                ->everySeconds(0.05)
+        );
+
+        $this
+            ->startAndStopShortScheduleAfterSeconds(0.15)
+            ->assertTempFileContains('called', 2);
+    }
+
+    /** @test */
+    public function it_will_overlap_tasks_by_default()
+    {
+        TestKernel::registerShortScheduleCommand(
+            fn (ShortSchedule $shortSchedule) => $shortSchedule
+                ->exec("echo 'called' >> '{$this->getTempFilePath()}'; sleep 0.2")
                 ->everySeconds(0.1)
         );
 
         $this
-            ->startAndStopShortScheduleAfterSeconds(0.29)
-            ->assertFileContains($tempFilePath, 'called', 2);
+            ->startAndStopShortScheduleAfterSeconds(0.59)
+            ->assertTempFileContains('called', 5);
+    }
+
+    /** @test */
+    public function it_can_prevent_overlaps()
+    {
+        TestKernel::registerShortScheduleCommand(
+            fn (ShortSchedule $shortSchedule) => $shortSchedule
+                ->exec("echo 'called' >> '{$this->getTempFilePath()}'; sleep 0.2")
+                ->everySeconds(0.1)
+                ->withoutOverlapping()
+        );
+
+        $this
+            ->startAndStopShortScheduleAfterSeconds(0.59)
+            ->assertTempFileContains('called', 2);
     }
 
     protected function startAndStopShortScheduleAfterSeconds(float $seconds): self

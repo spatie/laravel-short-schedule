@@ -50,14 +50,16 @@ class TestCase extends Orchestra
         return $loop;
     }
 
-    public function getTempFilePath(string $fileName): string
+    public function getTempFilePath(string $fileName = 'test.txt'): string
     {
         return $this->temporaryDirectory->path($fileName);
     }
 
-    protected function assertFileContains(string $tempFilePath, string $needle, int $expectedCount): self
+    protected function assertTempFileContains(string $needle, int $expectedCount): self
     {
-        $haystack = file_get_contents($tempFilePath);
+        $this->assertFileExists($this->getTempFilePath(), "Temp file does not exist");
+
+        $haystack = file_get_contents($this->getTempFilePath());
 
         $actualCount = substr_count($haystack, $needle);
 

@@ -23,7 +23,7 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
 
     public function shouldRun(): bool
     {
-        if ($this->isRunning() && ! $this->pendingShortScheduleCommand->allowsOverlaps) {
+        if ($this->isRunning() && (! $this->pendingShortScheduleCommand->allowsOverlaps)) {
             return false;
         }
 
@@ -46,7 +46,6 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
     public function run()
     {
         $commandString = $this->pendingShortScheduleCommand->command;
-
         $this->process = Process::fromShellCommandline($this->pendingShortScheduleCommand->command);
 
         event(new ShortScheduledTaskStarting($commandString, $this->process));
