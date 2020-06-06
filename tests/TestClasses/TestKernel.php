@@ -2,17 +2,27 @@
 
 namespace Spatie\ShortSchedule\Tests\TestClasses;
 
+use Closure;
 use Orchestra\Testbench\Console\Kernel;
 use Spatie\ShortSchedule\ShortSchedule;
 
 class TestKernel extends Kernel
 {
+    protected static array $registeredShortScheduleCommands = [];
+
     protected function shortSchedule(ShortSchedule $shortSchedule)
     {
-        $tempPath = __DIR__ . '/../temp';
+        collect(static::$registeredShortScheduleCommands)
+            ->each(fn (Closure $closure) => $closure($shortSchedule));
+    }
 
-        $file = "{$tempPath}/file.txt";
+    public static function registerShortScheduleCommand(Closure $closure)
+    {
+        static::$registeredShortScheduleCommands[] = $closure;
+    }
 
-        $shortSchedule->exec("touch '{$file}'")->everySecond();
+    public static function clearShortScheduleCommands()
+    {
+        static::$registeredShortScheduleCommands = [];
     }
 }

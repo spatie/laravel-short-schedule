@@ -2,21 +2,25 @@
 
 namespace Spatie\ShortSchedule\Tests\Feature;
 
-use React\EventLoop\Factory;
 use Spatie\ShortSchedule\ShortSchedule;
 use Spatie\ShortSchedule\Tests\TestCase;
+use Spatie\ShortSchedule\Tests\TestClasses\TestKernel;
 
 class ShortScheduleTest extends TestCase
 {
     /** @test */
     public function it_can_schedule_commands_in_the_kernel()
     {
-        $loop = Factory::create();
+        $loop = $this->getLoopThatStopsAfterSeconds(0.02);
 
-        $loop->addTimer(2, function () use ($loop) {
-            $loop->stop();
+        $tempFilePath = $this->getTempFilePath("test.txt");
+
+        TestKernel::registerShortScheduleCommand(function (ShortSchedule $shortSchedule) use ($tempFilePath) {
+            $shortSchedule->exec("touch '{$tempFilePath}'")->everySeconds(0.01);
         });
 
         (new ShortSchedule($loop))->registerCommands()->start();
+
+        $this->assertFileExists($tempFilePath);
     }
 }

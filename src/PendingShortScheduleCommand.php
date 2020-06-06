@@ -13,18 +13,18 @@ class PendingShortScheduleCommand
 {
     protected string $command = '';
 
-    protected int $frequencyInSeconds = 1;
+    protected float $frequencyInSeconds = 1;
 
     protected bool $allowsOverlaps = true;
 
     protected array $constraints = [];
 
-    public function everySecond(int $frequencyInSeconds = 1): self
+    public function everySecond(float $frequencyInSeconds = 1): self
     {
         return $this->everySeconds($frequencyInSeconds);
     }
 
-    public function everySeconds(int $frequencyInSeconds = 1): self
+    public function everySeconds(float $frequencyInSeconds = 1): self
     {
         $this->frequencyInSeconds = $frequencyInSeconds;
 
