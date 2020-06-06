@@ -1,5 +1,3 @@
-**Experimental: do not use yet in your production environment**
-
 # Schedule artisan commands to run at a sub-minute frequency
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-short-schedule.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-short-schedule)
