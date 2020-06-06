@@ -79,6 +79,12 @@ You can specify a specific amount of seconds using `everySeconds`
 $shortSchedule->command('artisan-command')->everySeconds(30);
 ```
 
+You can even schedule tasks at sub-second frequency. This task will run every half a second.
+
+```php
+$shortSchedule->command('artisan-command')->everySeconds(0.5);
+```
+
  ### Scheduling shell commands
  
  Use `exec` to schedule a bash command.
