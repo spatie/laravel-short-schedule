@@ -13,6 +13,8 @@
     </projectFiles>
 
     <issueHandlers>
+        <!-- Suppress warning "Method Illuminate\Foundation\Application::environment does not exist" -->
+        <UndefinedMethod errorLevel="suppress" />
     </issueHandlers>
 
     <plugins>

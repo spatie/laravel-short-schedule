@@ -16,7 +16,7 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
         $this->pendingShortScheduleCommand = $pendingShortScheduleCommand;
     }
 
-    public function frequencyInSeconds(): int
+    public function frequencyInSeconds(): float
     {
         return $this->pendingShortScheduleCommand->frequencyInSeconds;
     }
