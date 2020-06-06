@@ -9,7 +9,7 @@
 
 [Laravel's native scheduler](https://laravel.com/docs/master/scheduling) allows you to schedule Artisan commands to run every minute. 
 
-If you need to execute something with a higher frequency, for example every second, than you've come to the right package. With laravel-short-schedule installed, you can do this
+If you need to execute something with a higher frequency, for example every second, than you've come to the right package. With laravel-short-schedule installed, you can do this:
 
 ```php
 // in app\Console\Kernel.php
