@@ -15,7 +15,7 @@ class PendingShortScheduleCommand
 
     protected float $frequencyInSeconds = 1;
 
-    protected bool $allowsOverlaps = true;
+    protected bool $allowOverlaps = true;
 
     protected array $constraints = [];
 
@@ -47,7 +47,7 @@ class PendingShortScheduleCommand
 
     public function withoutOverlapping(): self
     {
-        $this->allowsOverlaps = false;
+        $this->allowOverlaps = false;
 
         return $this;
     }
