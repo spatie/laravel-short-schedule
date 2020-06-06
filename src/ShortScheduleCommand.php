@@ -2,6 +2,7 @@
 
 namespace Spatie\ShortSchedule;
 
+use Spatie\ShortSchedule\Events\ShortScheduledTaskStarted;
 use Spatie\ShortSchedule\Events\ShortScheduledTaskStarting;
 use Symfony\Component\Process\Process;
 
@@ -50,6 +51,6 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
 
         event(new ShortScheduledTaskStarting($commandString, $this->process));
         $this->process->start();
-        event(new ShortScheduledTaskStarting($commandString, $this->process));
+        event(new ShortScheduledTaskStarted($commandString, $this->process));
     }
 }
