@@ -50,8 +50,21 @@ class TestCase extends Orchestra
         return $loop;
     }
 
-    public function getTempFilePath(string $fileName)
+    public function getTempFilePath(string $fileName): string
     {
         return $this->temporaryDirectory->path($fileName);
+    }
+
+    protected function assertFileContains(string $tempFilePath, string $needle, int $expectedCount): self
+    {
+        $haystack = file_get_contents($tempFilePath);
+
+        $actualCount = substr_count($haystack, $needle);
+
+        $message = "Expected to find `{$needle}` {$expectedCount} time(s), but found it {$actualCount} time(s)";
+
+        $this->assertEquals($expectedCount, $actualCount, $message);
+
+        return $this;
     }
 }
