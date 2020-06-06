@@ -146,7 +146,19 @@ You can use all constraints mentioned above at once. The command will only execu
 
 ## Events
 
-TODO:
+#### `Spatie\ShortSchedule\Events\ShortScheduledTaksStarting`
+
+This event will be fired right before a task will be started. It has these public properties:
+
+- `command`: the command string that will be executed
+- `process`: the instance of `Symfony\Component\Process\Process` that will be used to execute the command
+
+#### `Spatie\ShortSchedule\Events\ShortScheduledTaksStarted`
+
+This event will be fired right before a task has been started. It has these public properties:
+
+- `command`: the command string that is being executed
+- `process`: the instance of `Symfony\Component\Process\Process` that is executing the command
 
 ## Testing
 

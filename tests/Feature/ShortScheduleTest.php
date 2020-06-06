@@ -76,13 +76,4 @@ class ShortScheduleTest extends TestCase
             ->startAndStopShortScheduleAfterSeconds(0.19)
             ->assertTempFileContains('called', 1);
     }
-
-    protected function startAndStopShortScheduleAfterSeconds(float $seconds): self
-    {
-        $loop = $this->getLoopThatStopsAfterSeconds($seconds);
-
-        (new ShortSchedule($loop))->registerCommands()->start();
-
-        return $this;
-    }
 }

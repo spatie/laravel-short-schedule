@@ -6,6 +6,7 @@ use Illuminate\Contracts\Console\Kernel;
 use Orchestra\Testbench\TestCase as Orchestra;
 use React\EventLoop\Factory;
 use React\EventLoop\LoopInterface;
+use Spatie\ShortSchedule\ShortSchedule;
 use Spatie\ShortSchedule\ShortScheduleServiceProvider;
 use Spatie\ShortSchedule\Tests\TestClasses\TestKernel;
 use Spatie\TemporaryDirectory\TemporaryDirectory;
@@ -66,6 +67,15 @@ class TestCase extends Orchestra
         $message = "Expected to find `{$needle}` {$expectedCount} time(s), but found it {$actualCount} time(s)";
 
         $this->assertEquals($expectedCount, $actualCount, $message);
+
+        return $this;
+    }
+
+    protected function startAndStopShortScheduleAfterSeconds(float $seconds): self
+    {
+        $loop = $this->getLoopThatStopsAfterSeconds($seconds);
+
+        (new ShortSchedule($loop))->registerCommands()->start();
 
         return $this;
     }
