@@ -65,7 +65,7 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
 
 ### Specify the amount of seconds
 
-You an artisan command every single second like this:
+You can run an artisan command every single second like this:
 
 ```php
 $shortSchedule->command('artisan-command')->everySecond();
