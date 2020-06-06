@@ -60,15 +60,15 @@ class ShortSchedule
                 return new ShortScheduleCommand($pendingCommand);
             })
             ->each(function (ShortScheduleCommand $command) {
-                $this->registerCommand($command);
+                $this->addCommandToLoop($command, $this->loop);
             });
 
         $this->loop->run();
     }
 
-    protected function registerCommand(ShortScheduleCommand $command): void
+    protected function addCommandToLoop(ShortScheduleCommand $command, LoopInterface $loop): void
     {
-        $this->loop->addPeriodicTimer($command->frequencyInSeconds(),  function () use ($command) {
+        $loop->addPeriodicTimer($command->frequencyInSeconds(),  function () use ($command) {
             if (! $command->shouldRun()) {
                 return;
             }

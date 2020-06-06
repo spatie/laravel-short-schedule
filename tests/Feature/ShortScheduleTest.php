@@ -18,7 +18,7 @@ class ShortScheduleTest extends TestCase
         );
 
         $this
-            ->startAndStopShortScheduleAfterSeconds(0.15)
+            ->runShortScheduleForSeconds(0.15)
             ->assertTempFileContains('called', 2);
     }
 
@@ -32,7 +32,7 @@ class ShortScheduleTest extends TestCase
         );
 
         $this
-            ->startAndStopShortScheduleAfterSeconds(0.59)
+            ->runShortScheduleForSeconds(0.59)
             ->assertTempFileContains('called', 5);
     }
 
@@ -47,7 +47,7 @@ class ShortScheduleTest extends TestCase
         );
 
         $this
-            ->startAndStopShortScheduleAfterSeconds(0.59)
+            ->runShortScheduleForSeconds(0.59)
             ->assertTempFileContains('called', 2);
     }
 
@@ -62,7 +62,7 @@ class ShortScheduleTest extends TestCase
         );
 
         $this
-            ->startAndStopShortScheduleAfterSeconds(0.19)
+            ->runShortScheduleForSeconds(0.19)
             ->assertTempFileContains('called', 0);
 
         TestKernel::registerShortScheduleCommand(
@@ -73,7 +73,7 @@ class ShortScheduleTest extends TestCase
         );
 
         $this
-            ->startAndStopShortScheduleAfterSeconds(0.19)
+            ->runShortScheduleForSeconds(0.19)
             ->assertTempFileContains('called', 1);
     }
 }

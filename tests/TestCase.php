@@ -71,7 +71,7 @@ class TestCase extends Orchestra
         return $this;
     }
 
-    protected function startAndStopShortScheduleAfterSeconds(float $seconds): self
+    protected function runShortScheduleForSeconds(float $seconds): self
     {
         $loop = $this->getLoopThatStopsAfterSeconds($seconds);
 
