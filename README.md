@@ -146,6 +146,8 @@ You can use all constraints mentioned above at once. The command will only execu
 
 ## Events
 
+You can hook into these events. Executing any extra logic you execute when responding to these events is blocking. If your code takes a long time to execute, all short scheduled jobs will be delayed. We highly recommend that any logic you wish to execute in response to these events, is put on a queue. 
+
 #### `Spatie\ShortSchedule\Events\ShortScheduledTaksStarting`
 
 This event will be fired right before a task will be started. It has these public properties:
