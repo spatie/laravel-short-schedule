@@ -11,16 +11,21 @@ class ShortScheduleTest extends TestCase
     /** @test */
     public function it_can_schedule_commands_in_the_kernel()
     {
-        $loop = $this->getLoopThatStopsAfterSeconds(0.02);
-
         $tempFilePath = $this->getTempFilePath("test.txt");
 
         TestKernel::registerShortScheduleCommand(
             fn (ShortSchedule $shortSchedule) => $shortSchedule->exec("touch '{$tempFilePath}'")->everySeconds(0.01)
         );
 
-        (new ShortSchedule($loop))->registerCommands()->start();
+        $this->startAndStopShortScheduledAfterSeconds(0.02);
 
         $this->assertFileExists($tempFilePath);
+    }
+
+    protected function startAndStopShortScheduledAfterSeconds(float $seconds)
+    {
+        $loop = $this->getLoopThatStopsAfterSeconds($seconds);
+
+        (new ShortSchedule($loop))->registerCommands()->start();
     }
 }
