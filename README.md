@@ -1,9 +1,7 @@
 # Schedule artisan commands to run at a sub-minute frequency
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-short-schedule.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-short-schedule)
 ![Tests](https://github.com/spatie/laravel-short-schedule/workflows/Tests/badge.svg)
 ![Psalm](https://github.com/spatie/laravel-short-schedule/workflows/Psalm/badge.svg)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-short-schedule.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-short-schedule)
 
 [Laravel's native scheduler](https://laravel.com/docs/master/scheduling) allows you to schedule Artisan commands to run every minute. 
 
