@@ -9,7 +9,7 @@ use Spatie\ShortSchedule\Tests\TestClasses\TestKernel;
 class ShortScheduleTest extends TestCase
 {
     /** @test */
-    public function it_can_schedule_commands_in_the_kernel()
+    public function it_will_execute_registered_command_in_the_shortSchedule_method_of_the_kernel()
     {
         TestKernel::registerShortScheduleCommand(
             fn (ShortSchedule $shortSchedule) => $shortSchedule
