@@ -20,21 +20,6 @@ class ShortSchedule
         $this->loop = $loop;
     }
 
-    public function registerCommands(): self
-    {
-        $kernel = app(Kernel::class);
-
-        $class = new ReflectionClass(get_class($kernel));
-
-        $shortScheduleMethod = $class->getMethod('shortSchedule');
-
-        $shortScheduleMethod->setAccessible(true);
-
-        $shortScheduleMethod->invokeArgs($kernel, [$this]);
-
-        return $this;
-    }
-
     public function command(string $command): PendingShortScheduleCommand
     {
         $pendingCommand = (new PendingShortScheduleCommand())->command($command);
@@ -52,6 +37,23 @@ class ShortSchedule
 
         return $pendingCommand;
     }
+
+    public function registerCommands(): self
+    {
+        $kernel = app(Kernel::class);
+
+        $class = new ReflectionClass(get_class($kernel));
+
+        $shortScheduleMethod = $class->getMethod('shortSchedule');
+
+        $shortScheduleMethod->setAccessible(true);
+
+        $shortScheduleMethod->invokeArgs($kernel, [$this]);
+
+        return $this;
+    }
+
+
 
     public function start(): void
     {
