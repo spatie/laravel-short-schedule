@@ -53,8 +53,6 @@ class ShortSchedule
         return $this;
     }
 
-
-
     public function run(): void
     {
         collect($this->pendingCommands)
