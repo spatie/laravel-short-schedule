@@ -75,7 +75,7 @@ class TestCase extends Orchestra
     {
         $loop = $this->getLoopThatStopsAfterSeconds($seconds);
 
-        (new ShortSchedule($loop))->registerCommands()->start();
+        (new ShortSchedule($loop))->registerCommands()->run();
 
         return $this;
     }

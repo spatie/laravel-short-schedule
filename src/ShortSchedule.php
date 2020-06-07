@@ -55,7 +55,7 @@ class ShortSchedule
 
 
 
-    public function start(): void
+    public function run(): void
     {
         collect($this->pendingCommands)
             ->map(function (PendingShortScheduleCommand $pendingCommand) {

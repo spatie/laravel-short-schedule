@@ -16,6 +16,6 @@ class ShortScheduleRunCommand extends Command
     {
         $loop = Factory::create();
 
-        (new ShortSchedule($loop))->registerCommands()->start();
+        (new ShortSchedule($loop))->registerCommands()->run();
     }
 }
