@@ -31,7 +31,7 @@ In [this video](https://spatie.be/videos/laravel-package-training/laravel-short-
 
 Want to know how it works under the hood? Then watch [this video](https://spatie.be/videos/laravel-package-training/laravel-short-schedule-part-2-under-the-hood).
 
-Finally, there's this video that shows how the package is tested. It shows how you can test [ReactPHP](https://reactphp.org) powered loops.
+Finally, there's [this video](https://spatie.be/videos/laravel-package-training/laravel-short-schedule-part-3-testing-the-package) that shows how the package is tested. You'll learn how you can test [ReactPHP](https://reactphp.org) powered loops.
 
 These videos are also part of the [Laravel Package Training](https://laravelpackage.training).
 
