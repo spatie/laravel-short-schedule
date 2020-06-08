@@ -18,7 +18,7 @@ class ShortScheduleTest extends TestCase
         );
 
         $this
-            ->runShortScheduleForSeconds(0.15)
+            ->runShortScheduleForSeconds(0.14)
             ->assertTempFileContains('called', 2);
     }
 
