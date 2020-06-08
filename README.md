@@ -1,7 +1,9 @@
 # Schedule artisan commands to run at a sub-minute frequency
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-short-schedule.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-short-schedule)
 ![Tests](https://github.com/spatie/laravel-short-schedule/workflows/Tests/badge.svg)
 ![Psalm](https://github.com/spatie/laravel-short-schedule/workflows/Psalm/badge.svg)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-short-schedule.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-short-schedule)
 
 [Laravel's native scheduler](https://laravel.com/docs/master/scheduling) allows you to schedule Artisan commands to run every minute. 
 
@@ -22,6 +24,16 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
     $shortSchedule->command('another-artisan-command')->everySeconds(0.5);
 }
 ```
+
+## Are you a visual learner?
+
+In [this video](https://spatie.be/videos/laravel-package-training/laravel-short-schedule-part-1-using-the-package) you'll see a demonstration of the package. 
+
+Want to know how it works under the hood? Then watch [this video](https://spatie.be/videos/laravel-package-training/laravel-short-schedule-part-2-under-the-hood).
+
+Finally, there's this video that shows how the package is tested. It shows how you can test [ReactPHP](https://reactphp.org) powered loops.
+
+These videos are also part of the [Laravel Package Training](https://laravelpackage.training).
 
 ## Support us
 
