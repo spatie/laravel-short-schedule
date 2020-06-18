@@ -17,6 +17,8 @@ class PendingShortScheduleCommand
 
     protected bool $allowOverlaps = true;
 
+    protected bool $evenInMaintenanceMode = false;
+
     protected array $constraints = [];
 
     public function everySecond(float $frequencyInSeconds = 1): self
@@ -48,6 +50,13 @@ class PendingShortScheduleCommand
     public function withoutOverlapping(): self
     {
         $this->allowOverlaps = false;
+
+        return $this;
+    }
+
+    public function runInMaintenanceMode(): self
+    {
+        $this->evenInMaintenanceMode = true;
 
         return $this;
     }
@@ -89,4 +98,5 @@ class PendingShortScheduleCommand
 
         return $this;
     }
+
 }

@@ -161,6 +161,14 @@ You can use all constraints mentioned above at once. The command will only execu
    ->everySecond();
  ```
 
+### Maintenance Mode
+
+Commands won't run whilst Laravel is in maintenance mode. If you would like to force a command to run in maintenance mode you can use the `runInMaintenanceMode` method. 
+
+```php
+$shortSchedule->command('artisan-command')->everySecond()->runInMaintenanceMode();
+```
+
 ## Events
 
 Executing any code when responding to these events is blocking. If your code takes a long time to execute, all short scheduled jobs will be delayed. We highly recommend to put any code you wish to execute in response to these events on a queue. 

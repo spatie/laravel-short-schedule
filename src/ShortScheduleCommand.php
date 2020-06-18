@@ -2,6 +2,7 @@
 
 namespace Spatie\ShortSchedule;
 
+use Illuminate\Support\Facades\App;
 use Spatie\ShortSchedule\Events\ShortScheduledTaskStarted;
 use Spatie\ShortSchedule\Events\ShortScheduledTaskStarting;
 use Symfony\Component\Process\Process;
@@ -24,6 +25,10 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
 
     public function shouldRun(): bool
     {
+       if(App::isDownForMaintenance() && (! $this->pendingShortScheduleCommand->evenInMaintenanceMode)) {
+         return false;
+       }
+
         if ($this->isRunning() && (! $this->pendingShortScheduleCommand->allowOverlaps)) {
             return false;
         }
