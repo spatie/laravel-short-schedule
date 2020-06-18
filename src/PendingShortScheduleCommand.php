@@ -98,5 +98,4 @@ class PendingShortScheduleCommand
 
         return $this;
     }
-
 }

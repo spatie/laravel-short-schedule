@@ -25,9 +25,9 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
 
     public function shouldRun(): bool
     {
-       if(App::isDownForMaintenance() && (! $this->pendingShortScheduleCommand->evenInMaintenanceMode)) {
-         return false;
-       }
+        if (App::isDownForMaintenance() && (! $this->pendingShortScheduleCommand->evenInMaintenanceMode)) {
+            return false;
+        }
 
         if ($this->isRunning() && (! $this->pendingShortScheduleCommand->allowOverlaps)) {
             return false;

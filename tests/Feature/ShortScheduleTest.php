@@ -2,11 +2,9 @@
 
 namespace Spatie\ShortSchedule\Tests\Feature;
 
-use Illuminate\Support\Facades\Artisan;
 use Spatie\ShortSchedule\ShortSchedule;
 use Spatie\ShortSchedule\Tests\TestCase;
 use Spatie\ShortSchedule\Tests\TestClasses\TestKernel;
-
 
 class ShortScheduleTest extends TestCase
 {
@@ -80,7 +78,7 @@ class ShortScheduleTest extends TestCase
     }
 
     /** @test **/
-    Public function it_wont_run_whilst_in_maintenance_mode()
+    public function it_wont_run_whilst_in_maintenance_mode()
     {
         $this->artisan('down')->expectsOutput('Application is now in maintenance mode.')->assertExitCode(0);
 
@@ -98,7 +96,7 @@ class ShortScheduleTest extends TestCase
     }
 
     /** @test **/
-    Public function it_will_run_whilst_in_maintenance_mode()
+    public function it_will_run_whilst_in_maintenance_mode()
     {
         $this->artisan('down')->expectsOutput('Application is now in maintenance mode.')->assertExitCode(0);
 
@@ -114,6 +112,5 @@ class ShortScheduleTest extends TestCase
             ->assertTempFileContains('called', 2);
 
         $this->artisan('up')->expectsOutput('Application is now live.')->assertExitCode(0);
-
     }
 }
