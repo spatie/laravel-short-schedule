@@ -173,14 +173,14 @@ $shortSchedule->command('artisan-command')->everySecond()->runInMaintenanceMode(
 
 Executing any code when responding to these events is blocking. If your code takes a long time to execute, all short scheduled jobs will be delayed. We highly recommend to put any code you wish to execute in response to these events on a queue. 
 
-#### `Spatie\ShortSchedule\Events\ShortScheduledTaksStarting`
+#### `Spatie\ShortSchedule\Events\ShortScheduledTaskStarting`
 
 This event will be fired right before a task will be started. It has these public properties:
 
 - `command`: the command string that will be executed
 - `process`: the instance of `Symfony\Component\Process\Process` that will be used to execute the command
 
-#### `Spatie\ShortSchedule\Events\ShortScheduledTaksStarted`
+#### `Spatie\ShortSchedule\Events\ShortScheduledTaskStarted`
 
 This event will be fired right before a task has been started. It has these public properties:
 
