@@ -55,22 +55,19 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
         $this->pendingShortScheduleCommand->getOnOneServer() ? $this->processOnOneServer() : $this->processCommand() ;
     }
 
-    private function processOnOneServer()
+    protected function processOnOneServer(): void
     {
         if (Cache::missing($this->pendingShortScheduleCommand->cacheName())) {
             Cache::add($this->pendingShortScheduleCommand->cacheName(), true, 60);
 
             $this->processCommand();
-
-            while ($this->process->isRunning()) {
-                // waiting for process to finish before clearing the cache item
-            }
+            $this->waitForProcessToFinish();
 
             Cache::forget($this->pendingShortScheduleCommand->cacheName());
         }
     }
 
-    private function processCommand()
+    private function processCommand(): void
     {
         $commandString = $this->pendingShortScheduleCommand->command;
         $this->process = Process::fromShellCommandline($commandString);
@@ -78,5 +75,11 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
         event(new ShortScheduledTaskStarting($commandString, $this->process));
         $this->process->start();
         event(new ShortScheduledTaskStarted($commandString, $this->process));
+    }
+
+    private function waitForProcessToFinish(): void
+    {
+        while ($this->process->isRunning()) {
+        }
     }
 }
