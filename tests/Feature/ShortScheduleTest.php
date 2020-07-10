@@ -2,6 +2,7 @@
 
 namespace Spatie\ShortSchedule\Tests\Feature;
 
+use Illuminate\Support\Facades\Cache;
 use Spatie\ShortSchedule\ShortSchedule;
 use Spatie\ShortSchedule\Tests\TestCase;
 use Spatie\ShortSchedule\Tests\TestClasses\TestKernel;
@@ -112,5 +113,22 @@ class ShortScheduleTest extends TestCase
             ->assertTempFileContains('called', 2);
 
         $this->artisan('up')->expectsOutput('Application is now live.')->assertExitCode(0);
+    }
+
+    /** @test **/
+    public function it_will_run_command_on_one_server()
+    {
+        TestKernel::registerShortScheduleCommand(
+            fn (ShortSchedule $shortSchedule) => $shortSchedule
+                ->exec("echo 'called' >> '{$this->getTempFilePath()}'")
+                ->everySeconds(0.05)
+                ->onOneServer()
+        );
+
+        $this
+            ->runShortScheduleForSeconds(0.14)
+            ->assertTempFileContains('called', 2);
+
+        $this->assertTrue(Cache::has('framework'.DIRECTORY_SEPARATOR.'schedule-'.sha1('0.05'."echo 'called' >> '{$this->getTempFilePath()}'")));
     }
 }

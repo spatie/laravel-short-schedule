@@ -17,6 +17,8 @@ class PendingShortScheduleCommand
 
     protected bool $allowOverlaps = true;
 
+    protected bool $onOneServer = false;
+
     protected bool $evenInMaintenanceMode = false;
 
     protected array $constraints = [];
@@ -71,6 +73,13 @@ class PendingShortScheduleCommand
         return ! $shouldNotRun;
     }
 
+    public function onOneServer(): self
+    {
+        $this->onOneServer = true;
+
+        return $this;
+    }
+
     public function between(string $startTime, string $endTime): self
     {
         $this->constraints[] = new BetweenConstraint($startTime, $endTime);
@@ -97,5 +106,15 @@ class PendingShortScheduleCommand
         $this->constraints[] = new WhenConstraint($closure);
 
         return $this;
+    }
+
+    public function getOnOneServer()
+    {
+        return $this->onOneServer;
+    }
+
+    public function cacheName()
+    {
+        return 'framework'.DIRECTORY_SEPARATOR.'schedule-'.sha1($this->frequencyInSeconds.$this->command);
     }
 }

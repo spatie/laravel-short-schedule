@@ -169,6 +169,14 @@ Commands won't run whilst Laravel is in maintenance mode. If you would like to f
 $shortSchedule->command('artisan-command')->everySecond()->runInMaintenanceMode();
 ```
 
+### Running Tasks On One Server
+
+Limit commands to only run on one server at a time. 
+
+```php
+$shortSchedule->command('artisan-command')->everySecond()->onOneServer();
+```
+
 ## Events
 
 Executing any code when responding to these events is blocking. If your code takes a long time to execute, all short scheduled jobs will be delayed. We highly recommend to put any code you wish to execute in response to these events on a queue. 
