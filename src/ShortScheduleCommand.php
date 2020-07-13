@@ -3,6 +3,7 @@
 namespace Spatie\ShortSchedule;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Spatie\ShortSchedule\Events\ShortScheduledTaskStarted;
 use Spatie\ShortSchedule\Events\ShortScheduledTaskStarting;
 use Symfony\Component\Process\Process;
@@ -51,11 +52,36 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
 
     public function run(): void
     {
+        $this->pendingShortScheduleCommand->getOnOneServer() ? $this->processOnOneServer() : $this->processCommand() ;
+    }
+
+    protected function processOnOneServer(): void
+    {
+        if (Cache::has($this->pendingShortScheduleCommand->cacheName())) {
+            return;
+        }
+
+        Cache::add($this->pendingShortScheduleCommand->cacheName(), true, 60);
+
+        $this->processCommand();
+        $this->waitForProcessToFinish();
+
+        Cache::forget($this->pendingShortScheduleCommand->cacheName());
+    }
+
+    private function processCommand(): void
+    {
         $commandString = $this->pendingShortScheduleCommand->command;
-        $this->process = Process::fromShellCommandline($this->pendingShortScheduleCommand->command);
+        $this->process = Process::fromShellCommandline($commandString);
 
         event(new ShortScheduledTaskStarting($commandString, $this->process));
         $this->process->start();
         event(new ShortScheduledTaskStarted($commandString, $this->process));
+    }
+
+    private function waitForProcessToFinish(): void
+    {
+        while ($this->process->isRunning()) {
+        }
     }
 }
