@@ -116,8 +116,11 @@ class ShortScheduleTest extends TestCase
     }
 
     /** @test **/
-    public function it_will_run_command_on_one_server()
+    public function do_not_run_if_already_running_on_another_server()
     {
+        $key = 'framework'.DIRECTORY_SEPARATOR.'schedule-'.sha1('0.05'."echo 'called' >> '{$this->getTempFilePath()}'");
+        Cache::add($key, true, 60);
+
         TestKernel::registerShortScheduleCommand(
             fn (ShortSchedule $shortSchedule) => $shortSchedule
                 ->exec("echo 'called' >> '{$this->getTempFilePath()}'")
@@ -127,8 +130,6 @@ class ShortScheduleTest extends TestCase
 
         $this
             ->runShortScheduleForSeconds(0.14)
-            ->assertTempFileContains('called', 2);
-
-        $this->assertTrue(Cache::has('framework'.DIRECTORY_SEPARATOR.'schedule-'.sha1('0.05'."echo 'called' >> '{$this->getTempFilePath()}'")));
+            ->assertTempFileContains('called', 0);
     }
 }
