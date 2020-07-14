@@ -72,7 +72,7 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
     private function processCommand(): void
     {
         $commandString = $this->pendingShortScheduleCommand->command;
-        $this->process = Process::fromShellCommandline($commandString, $this->pendingShortScheduleCommand->basePath);
+        $this->process = Process::fromShellCommandline($commandString, base_path());
 
         event(new ShortScheduledTaskStarting($commandString, $this->process));
         $this->process->start();

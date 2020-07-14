@@ -23,8 +23,6 @@ class PendingShortScheduleCommand
 
     protected array $constraints = [];
 
-    protected ?string $basePath = null;
-
     public function everySecond(float $frequencyInSeconds = 1): self
     {
         return $this->everySeconds($frequencyInSeconds);
@@ -40,7 +38,6 @@ class PendingShortScheduleCommand
     public function command(string $artisanCommand):self
     {
         $this->command = "php artisan {$artisanCommand}";
-        $this->basePath = base_path();
 
         return $this;
     }
