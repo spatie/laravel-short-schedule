@@ -25,7 +25,6 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "orchestra/testbench": "^5.0",
         "phpunit/phpunit": "^9.0",
-        "psalm/plugin-laravel": "^1.2",
         "spatie/test-time": "^1.2",
         "vimeo/psalm": "^3.11"
     },

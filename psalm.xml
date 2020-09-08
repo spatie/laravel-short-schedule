@@ -16,8 +16,4 @@
         <!-- Suppress warning "Method Illuminate\Foundation\Application::environment does not exist" -->
         <UndefinedMethod errorLevel="suppress" />
     </issueHandlers>
-
-    <plugins>
-        <pluginClass class="Psalm\LaravelPlugin\Plugin"/>
-    </plugins>
 </psalm>
