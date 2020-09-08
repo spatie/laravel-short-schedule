@@ -13,6 +13,6 @@ class EnvironmentConstraint implements RunConstraint
 
     public function shouldRun(): bool
     {
-        return app()->environment($this->allowedEnvironments);
+        return (bool) app()->environment($this->allowedEnvironments);
     }
 }
