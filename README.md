@@ -37,7 +37,7 @@ These videos are also part of the [Laravel Package Training](https://laravelpack
 
 ## Support us
 
-[![Image](https://github-ads.s3.eu-central-1.amazonaws.com/laravel-short-schedule.jpg)](https://spatie.be/github-ad-click/laravel-short-schedule)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-short-schedule.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-short-schedule)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
