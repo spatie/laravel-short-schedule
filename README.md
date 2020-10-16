@@ -59,6 +59,16 @@ php artisan short-schedule:run
 
 You should use a process monitor like [Supervisor](http://supervisord.org/index.html) to keep this task going at all times, and to automatically start it when your server boots. Whenever you change the schedule, you should restart this command.
 
+### Lumen
+
+Before you can run the `php artisan short-schedule:run` command in your Lumen project, you should make a copy of the `ShortScheduleRunCommand` into your `app/Commands` folder:
+
+```bash
+cp ./vendor/spatie/laravel-short-schedule/src/Commands/ShortScheduleRunCommand.php ./app/Console/Commands/ShortScheduleRunCommand.php
+```
+
+Next, edit the new `ShortScheduleRunCommand.php` file, and change the namespace from `namespace Spatie\ShortSchedule\Commands;` to `namespace App\Console\Commands;` and you're good to go!
+
 ## Usage
 
 In `app\Console\Kernel` you should add a method named `shortSchedule`.
