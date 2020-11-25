@@ -67,8 +67,6 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
 
     public function run(): void
     {
-        $this->write(PHP_EOL.'Execution #'.(++$this->count).' in '.now()->isoFormat('L LTS').' output:', 'info');
-
         $this->pendingShortScheduleCommand->getOnOneServer() ? $this->processOnOneServer() : $this->processCommand() ;
     }
 
@@ -111,13 +109,20 @@ class ShortScheduleCommand extends PendingShortScheduleCommand
         }
     }
 
+    private function getExection(): string
+    {
+        return PHP_EOL.'Execution #'.(++$this->count).' in '.now()->isoFormat('L LTS').' output:';
+    }
+
     private function write($string, $style = null): void
     {
         if (App::environment('testing') && $this->pendingShortScheduleCommand->verbosity === OutputInterface::VERBOSITY_NORMAL) {
-            echo $string.PHP_EOL;
+            echo $this->getExection().$string;
 
             return;
         }
+
+        $this->console->writeln('<info>'.$this->getExection().'</info>');
 
         $styled = $style ? "<$style>$string</$style>" : $string;
 

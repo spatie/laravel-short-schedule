@@ -150,7 +150,7 @@ class ShortScheduleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_running_write_to_console()
+    public function write_to_console_running_command()
     {
         TestKernel::registerShortScheduleCommand(
             fn (ShortSchedule $shortSchedule) => $shortSchedule
@@ -167,7 +167,7 @@ class ShortScheduleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_prevent_overlaps_write_to_console()
+    public function write_to_console_prevent_overlaps()
     {
         TestKernel::registerShortScheduleCommand(
             fn (ShortSchedule $shortSchedule) => $shortSchedule
@@ -185,7 +185,7 @@ class ShortScheduleTest extends TestCase
     }
 
     /** @test **/
-    public function it_wont_run_whilst_in_maintenance_mode_write_to_console()
+    public function write_to_console_whilst_in_maintenance_mode()
     {
         $this->artisan('down')->expectsOutput('Application is now in maintenance mode.')->assertExitCode(0);
 
@@ -206,7 +206,7 @@ class ShortScheduleTest extends TestCase
     }
 
     /** @test **/
-    public function do_not_run_if_already_running_on_another_server_write_to_console()
+    public function write_to_console_if_already_running_on_another_server()
     {
         $key = 'framework'.DIRECTORY_SEPARATOR.'schedule-'.sha1('0.05'."echo 'called' >> '{$this->getTempFilePath()}'");
         Cache::add($key, true, 60);
@@ -224,5 +224,22 @@ class ShortScheduleTest extends TestCase
         $this
             ->runShortScheduleForSeconds(0.14)
             ->assertTempFileContains('called', 0);
+    }
+
+    /** @test */
+    public function write_to_console_execution()
+    {
+        TestKernel::registerShortScheduleCommand(
+            fn (ShortSchedule $shortSchedule) => $shortSchedule
+                ->exec("echo 'called' >> '{$this->getTempFilePath()}'")
+                ->everySeconds(0.05)
+                ->verbose()
+        );
+
+        $this->expectOutputRegex('/.*Execution #[0-9]+.*/i');
+
+        $this
+            ->runShortScheduleForSeconds(0.06)
+            ->assertTempFileContains('called', 1);
     }
 }

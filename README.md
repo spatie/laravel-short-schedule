@@ -185,6 +185,27 @@ Limit commands to only run on one server at a time.
 $shortSchedule->command('artisan-command')->everySecond()->onOneServer();
 ```
 
+### Write verbose to console
+
+The console will write which command was executed and when. It will also write why the command was skipped.
+
+```php
+$shortSchedule->command('artisan-command')->everySecond()->verbose();
+```
+```
+Execution #1 in 11/25/2020 2:03:33 PM output:
+Running command: echo 'called'
+
+Execution #2 in 11/25/2020 2:03:32 PM output:
+Skipping command (still is running): echo 'called'
+
+Execution #3 in 11/25/2020 2:05:32 PM output:
+Skipping command (system is down): echo 'called'
+
+Execution #4 in 11/25/2020 2:15:32 PM output:
+Skipping command (has already run on another server): echo 'called'
+```
+
 ## Events
 
 Executing any code when responding to these events is blocking. If your code takes a long time to execute, all short scheduled jobs will be delayed. We highly recommend to put any code you wish to execute in response to these events on a queue. 
