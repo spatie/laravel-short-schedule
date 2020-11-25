@@ -8,6 +8,7 @@ use Spatie\ShortSchedule\RunConstraints\BetweenConstraint;
 use Spatie\ShortSchedule\RunConstraints\EnvironmentConstraint;
 use Spatie\ShortSchedule\RunConstraints\RunConstraint;
 use Spatie\ShortSchedule\RunConstraints\WhenConstraint;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class PendingShortScheduleCommand
 {
@@ -23,6 +24,8 @@ class PendingShortScheduleCommand
 
     protected array $constraints = [];
 
+    protected int $verbosity = OutputInterface::VERBOSITY_QUIET;
+
     public function everySecond(float $frequencyInSeconds = 1): self
     {
         return $this->everySeconds($frequencyInSeconds);
@@ -37,7 +40,7 @@ class PendingShortScheduleCommand
 
     public function command(string $artisanCommand):self
     {
-        $this->command = "php artisan {$artisanCommand}";
+        $this->command = PHP_BINARY." artisan {$artisanCommand}";
 
         return $this;
     }
@@ -104,6 +107,13 @@ class PendingShortScheduleCommand
     public function when(Closure $closure): self
     {
         $this->constraints[] = new WhenConstraint($closure);
+
+        return $this;
+    }
+
+    public function verbose(): self
+    {
+        $this->verbosity = OutputInterface::VERBOSITY_NORMAL;
 
         return $this;
     }
