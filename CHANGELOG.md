@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.3.0 - 2020-12-24
+
+- add PHP8 support (#25)
+
 ## 1.2.2 - 2020-09-08
 
 - add support for Laravel 8
