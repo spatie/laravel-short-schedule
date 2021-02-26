@@ -26,7 +26,6 @@
         "mockery/mockery": "^1.3.3",
         "orchestra/testbench": "^5.0|^6.0",
         "phpunit/phpunit": "^9.0",
-        "sanmai/phpunit-legacy-adapter": "^8.2",
         "spatie/test-time": "^1.2",
         "vimeo/psalm": "^4.3"
     },
