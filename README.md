@@ -59,12 +59,12 @@ php artisan short-schedule:run
 
 You should use a process monitor like [Supervisor](http://supervisord.org/index.html) to keep this task going at all times, and to automatically start it when your server boots. Whenever you change the schedule, you should restart this command.
 
-Sometimes operations can take much RAM, in this case set option `--lifetime` short schedule worker may help:
+Sometimes operations can take much RAM, in this case setting the lifetime of the short schedule worker may help:
 
 ```bash
 php artisan short-schedule:run --lifetime=60 // after 1 minute the worker will be terminated
 ```
-When setting the lifetime of the worker, the worker and all it's child processes will be terminated, so the RAM will be freed, then something like supervisor will bring it back 
+When lifetime of the worker is set, after specified amount of seconds the worker and all it's child processes will be terminated, so some of RAM will be freed, then supervisor(or something like that) will bring it back 
 ### Lumen
 
 Before you can run the `php artisan short-schedule:run` command in your Lumen project, you should make a copy of the `ShortScheduleRunCommand` into your `app/Commands` folder:
