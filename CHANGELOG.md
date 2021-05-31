@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.4.0 - 2021-05-31
+
+- add lifetime option
+
 ## 1.3.0 - 2020-12-24
 
 - add PHP8 support (#25)
