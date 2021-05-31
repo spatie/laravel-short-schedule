@@ -2,7 +2,7 @@
 
 namespace Spatie\ShortSchedule\Tests\Unit\RunConstraints;
 
-use PhpCsFixer\Tests\TestCase;
+use Spatie\ShortSchedule\Tests\TestCase;
 use Spatie\ShortSchedule\RunConstraints\WhenConstraint;
 
 class WhenConstraintTest extends TestCase
