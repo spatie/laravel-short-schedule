@@ -59,7 +59,7 @@ php artisan short-schedule:run
 
 You should use a process monitor like [Supervisor](http://supervisord.org/index.html) to keep this task going at all times, and to automatically start it when your server boots. Whenever you change the schedule, you should restart this command.
 
-Sometimes operations can take much RAM, in this case setting the lifetime of the short schedule worker may help:
+Sometimes operations can take much RAM, in this case setting the lifetime (in seconds) of the short schedule worker may help:
 
 ```bash
 php artisan short-schedule:run --lifetime=60 // after 1 minute the worker will be terminated
