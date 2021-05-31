@@ -11,7 +11,7 @@ class ShortScheduleRunCommand extends Command
     protected $signature = 'short-schedule:run {--lifetime=}';
 
     protected $description = 'Run the short scheduled commands
-                              {--lifetime= : The life time of worker';
+                              {--lifetime= : The lifetime in seconds of worker';
 
     public function handle()
     {
