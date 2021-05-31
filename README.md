@@ -64,7 +64,8 @@ Sometimes operations can take much RAM, in this case setting the lifetime (in se
 ```bash
 php artisan short-schedule:run --lifetime=60 // after 1 minute the worker will be terminated
 ```
-When lifetime of the worker is set, after specified amount of seconds the worker and all it's child processes will be terminated, so some of RAM will be freed, then supervisor(or something like that) will bring it back 
+When lifetime of the worker is set, after specified amount of seconds the worker and all it's child processes will be terminated, so some of RAM will be freed, then supervisor (or similar watcher) will bring it back.
+
 ### Lumen
 
 Before you can run the `php artisan short-schedule:run` command in your Lumen project, you should make a copy of the `ShortScheduleRunCommand` into your `app/Commands` folder:
