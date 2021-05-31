@@ -7,3 +7,5 @@ coverage
 .idea
 .php_cs.cache
 tests/temp
+.php-cs-fixer.cache
+
