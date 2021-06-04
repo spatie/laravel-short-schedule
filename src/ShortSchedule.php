@@ -20,10 +20,6 @@ class ShortSchedule
     public function __construct(LoopInterface $loop)
     {
         $this->loop = $loop;
-
-        if (config('app.env') === 'production') {
-            $this->lifetime = 30;
-        }
     }
 
     public function command(string $command): PendingShortScheduleCommand
