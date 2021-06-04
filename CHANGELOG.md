@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.4.1 - 2021-06-04
+
+- do not set a default lifetime for production
+
 ## 1.4.0 - 2021-05-31
 
 - add lifetime option
