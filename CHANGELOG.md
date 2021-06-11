@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.4.2 - 2021-06-11
+
+- allow spatie/temporary-directory 2.* (#35)
+
 ## 1.4.1 - 2021-06-04
 
 - do not set a default lifetime for production
