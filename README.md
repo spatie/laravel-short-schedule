@@ -117,7 +117,7 @@ $shortSchedule->command('artisan-command')->everySeconds(0.5);
  Use `exec` to schedule a bash command.
  
 ```php
-$shortSchedule->bash('bash-command')->everySecond();
+$shortSchedule->exec('bash-command')->everySecond();
 ```
  
  ### Preventing overlaps
