@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.4.3 - 2021-07-22
+
+- fixed description and help message (#37)
+
 ## 1.4.2 - 2021-06-11
 
 - allow spatie/temporary-directory 2.* (#35)
