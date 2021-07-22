@@ -8,10 +8,9 @@ use Spatie\ShortSchedule\ShortSchedule;
 
 class ShortScheduleRunCommand extends Command
 {
-    protected $signature = 'short-schedule:run {--lifetime=}';
+    protected $signature = 'short-schedule:run {--lifetime= : The lifetime in seconds of worker}';
 
-    protected $description = 'Run the short scheduled commands
-                              {--lifetime= : The lifetime in seconds of worker';
+    protected $description = 'Run the short scheduled commands';
 
     public function handle()
     {
