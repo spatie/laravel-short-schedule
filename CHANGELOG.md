@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.4.4 - 2021-12-09
+
+## What's Changed
+
+- Using the PHP Version the scheduler is called with for artisan commands by @TimGeDev in https://github.com/spatie/laravel-short-schedule/pull/50
+
+## New Contributors
+
+- @TimGeDev made their first contribution in https://github.com/spatie/laravel-short-schedule/pull/50
+
+**Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.4.3...1.4.4
+
 ## 1.4.3 - 2021-07-22
 
 - fixed description and help message (#37)
