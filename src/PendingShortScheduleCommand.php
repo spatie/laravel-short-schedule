@@ -37,7 +37,7 @@ class PendingShortScheduleCommand
 
     public function command(string $artisanCommand):self
     {
-        $this->command = "php artisan {$artisanCommand}";
+        $this->command = PHP_BINARY . " artisan {$artisanCommand}";
 
         return $this;
     }
