@@ -3,6 +3,7 @@
 namespace Spatie\ShortSchedule;
 
 use Closure;
+use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
 use Spatie\ShortSchedule\RunConstraints\BetweenConstraint;
 use Spatie\ShortSchedule\RunConstraints\EnvironmentConstraint;
@@ -35,8 +36,12 @@ class PendingShortScheduleCommand
         return $this;
     }
 
-    public function command(string $artisanCommand):self
+    public function command(string $artisanCommand): self
     {
+        if (class_exists($artisanCommand)) {
+            $artisanCommand = Container::getInstance()->make($artisanCommand)->getName();
+        }
+
         $this->command = PHP_BINARY . " artisan {$artisanCommand}";
 
         return $this;
