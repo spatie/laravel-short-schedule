@@ -21,6 +21,9 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
     
     // this command will run every half a second
     $shortSchedule->command('another-artisan-command')->everySeconds(0.5);
+    
+    // this command will run every second and its signature will be retrieved from command automatically
+    $shortSchedule->command(\Spatie\ShortSchedule\Tests\Unit\TestCommand::class)->everySecond();
 }
 ```
 
@@ -89,6 +92,9 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
 {
     // this artisan command will run every second
     $shortSchedule->command('artisan-command')->everySecond();
+    
+    // this artisan command will run every second, its signature will be resolved from container
+    $shortSchedule->command(\Spatie\ShortSchedule\Tests\Unit\TestCommand::class)->everySecond();
 }
 ```
 
