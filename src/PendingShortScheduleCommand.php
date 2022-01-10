@@ -39,7 +39,7 @@ class PendingShortScheduleCommand
     public function command(string $artisanCommand): self
     {
         if (class_exists($artisanCommand)) {
-            $artisanCommand = Container::getInstance()->make($artisanCommand)->getName();
+            $artisanCommand = app($artisanCommand)->getName();
         }
 
         $this->command = PHP_BINARY . " artisan {$artisanCommand}";
