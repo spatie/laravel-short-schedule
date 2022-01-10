@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.4.5 - 2022-01-10
+
+## What's Changed
+
+- PendingShortScheduleCommand::command method will attempt to resolve command name if class name was given by @etahamer in https://github.com/spatie/laravel-short-schedule/pull/54
+
+## New Contributors
+
+- @etahamer made their first contribution in https://github.com/spatie/laravel-short-schedule/pull/54
+
+**Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.4.4...1.4.5
+
 ## 1.4.4 - 2021-12-09
 
 ## What's Changed
