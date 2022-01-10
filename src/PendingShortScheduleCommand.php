@@ -3,7 +3,6 @@
 namespace Spatie\ShortSchedule;
 
 use Closure;
-use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
 use Spatie\ShortSchedule\RunConstraints\BetweenConstraint;
 use Spatie\ShortSchedule\RunConstraints\EnvironmentConstraint;
