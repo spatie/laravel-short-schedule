@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "illuminate/cache": "^9.0",
+        "illuminate/cache": "^8.71|^9.0",
         "react/event-loop": "^1.1",
         "spatie/temporary-directory": "^2.0"
     },
