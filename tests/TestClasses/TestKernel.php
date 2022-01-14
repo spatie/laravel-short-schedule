@@ -3,7 +3,7 @@
 namespace Spatie\ShortSchedule\Tests\TestClasses;
 
 use Closure;
-use Orchestra\Testbench\Console\Kernel;
+use Illuminate\Foundation\Console\Kernel;
 use Spatie\ShortSchedule\ShortSchedule;
 
 class TestKernel extends Kernel
