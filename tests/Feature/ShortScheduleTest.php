@@ -81,7 +81,7 @@ class ShortScheduleTest extends TestCase
     /** @test **/
     public function it_wont_run_whilst_in_maintenance_mode()
     {
-        $this->artisan('down')->expectsOutput('Application is now in maintenance mode.')->assertExitCode(0);
+        $this->artisan('down')->assertExitCode(0);
 
         TestKernel::registerShortScheduleCommand(
             fn (ShortSchedule $shortSchedule) => $shortSchedule
@@ -93,13 +93,13 @@ class ShortScheduleTest extends TestCase
             ->runShortScheduleForSeconds(0.14)
             ->assertTempFileContains('called', 0);
 
-        $this->artisan('up')->expectsOutput('Application is now live.')->assertExitCode(0);
+        $this->artisan('up')->assertExitCode(0);
     }
 
     /** @test **/
     public function it_will_run_whilst_in_maintenance_mode()
     {
-        $this->artisan('down')->expectsOutput('Application is now in maintenance mode.')->assertExitCode(0);
+        $this->artisan('down')->assertExitCode(0);
 
         TestKernel::registerShortScheduleCommand(
             fn (ShortSchedule $shortSchedule) => $shortSchedule
@@ -112,7 +112,7 @@ class ShortScheduleTest extends TestCase
             ->runShortScheduleForSeconds(0.14)
             ->assertTempFileContains('called', 2);
 
-        $this->artisan('up')->expectsOutput('Application is now live.')->assertExitCode(0);
+        $this->artisan('up')->assertExitCode(0);
     }
 
     /** @test **/
