@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.5.1 - 2023-01-23
+
+- support L10
+
 ## 1.5.0 - 2022-01-14
 
 - Support Laravel 9
