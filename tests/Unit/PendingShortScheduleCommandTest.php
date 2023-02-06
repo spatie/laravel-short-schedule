@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Spatie\ShortSchedule\Tests\Unit;
 
@@ -7,22 +9,21 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use ReflectionClass;
 use Spatie\ShortSchedule\PendingShortScheduleCommand;
 
-class PendingShortScheduleCommandTest extends Orchestra
-{
-    /** @test */
-    public function it_will_generate_command_from_command_class(): void
-    {
-        $pendingCommand = new PendingShortScheduleCommand();
-        $pendingCommand->command(TestCommand::class);
-        $reflectionClass = new ReflectionClass($pendingCommand);
+uses(Orchestra::class);
 
-        $commandProperty = $reflectionClass->getProperty('command');
-        $commandProperty->setAccessible(true);
+it('will generate command from command class', function () {
+    $pendingCommand = new PendingShortScheduleCommand();
+    $pendingCommand->command(TestCommand::class);
+    $reflectionClass = new ReflectionClass($pendingCommand);
 
-        $artisanCommand = 'test-command';
-        $this->assertEquals(PHP_BINARY . " artisan {$artisanCommand}", $commandProperty->getValue($pendingCommand));
-    }
-}
+    $commandProperty = $reflectionClass->getProperty('command');
+    $commandProperty->setAccessible(true);
+
+    $artisanCommand = 'test-command';
+    expect($commandProperty->getValue($pendingCommand))->toEqual(
+        PHP_BINARY . " artisan {$artisanCommand}"
+    );
+});
 
 class TestCommand extends Command
 {

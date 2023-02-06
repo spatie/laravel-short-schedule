@@ -1,3 +1,3 @@
 <?php
 
-uses(Spatie\ShortSchedule\Tests\TestCase::class)->in('.');
+uses(Spatie\ShortSchedule\Tests\TestCase::class)->in('Feature');
