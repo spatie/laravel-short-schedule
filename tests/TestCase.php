@@ -15,7 +15,7 @@ class TestCase extends Orchestra
 {
     private TemporaryDirectory $temporaryDirectory;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
