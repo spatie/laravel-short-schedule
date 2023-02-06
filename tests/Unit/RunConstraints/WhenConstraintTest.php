@@ -1,19 +1,11 @@
 <?php
 
-namespace Spatie\ShortSchedule\Tests\Unit\RunConstraints;
-
 use Spatie\ShortSchedule\RunConstraints\WhenConstraint;
-use Spatie\ShortSchedule\Tests\TestCase;
 
-class WhenConstraintTest extends TestCase
-{
-    /** @test */
-    public function it_will_run_when_the_closure_allows_it()
-    {
-        $constraint = new WhenConstraint(fn () => true);
-        $this->assertTrue($constraint->shouldRun());
+it('will run when the closure allows it', function () {
+    $constraint = new WhenConstraint(fn () => true);
+    expect($constraint->shouldRun())->toBeTrue();
 
-        $constraint = new WhenConstraint(fn () => false);
-        $this->assertFalse($constraint->shouldRun());
-    }
-}
+    $constraint = new WhenConstraint(fn () => false);
+    expect($constraint->shouldRun())->toBeFalse();
+});
