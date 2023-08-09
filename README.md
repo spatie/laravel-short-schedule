@@ -71,6 +71,19 @@ php artisan short-schedule:run --lifetime=60 // after 1 minute the worker will b
 
 After the given amount of seconds, the worker and all it's child processes will be terminated, freeing all memory. Then supervisor (or similar watcher) will bring it back.
 
+### Laravel
+
+Before you can run the `php artisan short-schedule:run` command in your Laravel project, add the service provider in the `/config/app.php` file
+
+```php
+'providers' => [
+    /*
+     * Package Service Providers...
+     */
+    Spatie\ShortSchedule\ShortScheduleServiceProvider::class,
+],
+```
+
 ### Lumen
 
 Before you can run the `php artisan short-schedule:run` command in your Lumen project, you should make a copy of the `ShortScheduleRunCommand` into your `app/Commands` folder:
