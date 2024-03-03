@@ -163,13 +163,13 @@ $shortSchedule->command('artisan-command')->when(fn() => rand() %2)->everySecond
  The command will only run on the given environment.
  
  ```php
- $shortSchedule->command('artisan-command')->environment('production')->everySecond();
+ $shortSchedule->command('artisan-command')->environments('production')->everySecond();
  ```
 
 You can also pass an array:
 
  ```php
- $shortSchedule->command('artisan-command')->environment(['staging', 'production'])->everySecond();
+ $shortSchedule->command('artisan-command')->environments(['staging', 'production'])->everySecond();
  ```
 
 ### Composite constraints
