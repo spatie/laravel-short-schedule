@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.5.2 - 2024-03-07
+
+### What's Changed
+
+* Fix typo in readme by @benholmen in https://github.com/spatie/laravel-short-schedule/pull/91
+* Laravel 11.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-short-schedule/pull/90
+
+### New Contributors
+
+* @benholmen made their first contribution in https://github.com/spatie/laravel-short-schedule/pull/91
+* @laravel-shift made their first contribution in https://github.com/spatie/laravel-short-schedule/pull/90
+
+**Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.5.1...1.5.2
+
 ## 1.5.1 - 2023-01-23
 
 - support L10
