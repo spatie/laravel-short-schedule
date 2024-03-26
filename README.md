@@ -9,6 +9,23 @@
 If you need to execute something with a higher frequency, for example every second, than you've come to the right package. With laravel-short-schedule installed, you can do this:
 
 ```php
+// in your routes/console.php file
+
+use Spatie\ShortSchedule\Facades\ShortSchedule;
+
+// this command will run every second
+ShortSchedule::command('artisan-command')->everySecond();
+    
+// this command will run every 30 seconds
+ShortSchedule::command('another-artisan-command')->everySeconds(30);
+
+// this command will run every half a second
+ShortSchedule::command('another-artisan-command')->everySeconds(0.5);
+```
+
+Alternatively, you could add this to the `shortSchedule` method in your console kernel:
+
+```php
 // in app\Console\Kernel.php
 
 protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSchedule)
@@ -83,6 +100,16 @@ Next, edit the new `ShortScheduleRunCommand.php` file, and change the namespace 
 
 ## Usage
 
+Un your routes/console.php file, you can use the `ShortSchedule` facade to schedule commands.
+
+```php
+// in your routes/console.php file
+
+use Spatie\ShortSchedule\Facades\ShortSchedule;
+
+ShortSchedule::command('artisan-command')->everySecond();
+```
+
 In `app\Console\Kernel` you should add a method named `shortSchedule`.
 
 ```php
@@ -103,19 +130,19 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
 You can run an artisan command every single second like this:
 
 ```php
-$shortSchedule->command('artisan-command')->everySecond();
+ShortSchedule::command('artisan-command')->everySecond();
 ```
 
 You can specify a specific amount of seconds using `everySeconds`
 
 ```php
-$shortSchedule->command('artisan-command')->everySeconds(30);
+ShortSchedule::command('artisan-command')->everySeconds(30);
 ```
 
 You can even schedule tasks at sub-second frequency. This task will run every half a second.
 
 ```php
-$shortSchedule->command('artisan-command')->everySeconds(0.5);
+ShortSchedule::command('artisan-command')->everySeconds(0.5);
 ```
 
  ### Scheduling shell commands
@@ -123,7 +150,7 @@ $shortSchedule->command('artisan-command')->everySeconds(0.5);
  Use `exec` to schedule a bash command.
  
 ```php
-$shortSchedule->exec('bash-command')->everySecond();
+ShortSchedule::exec('bash-command')->everySecond();
 ```
  
  ### Preventing overlaps
@@ -133,7 +160,7 @@ $shortSchedule->exec('bash-command')->everySecond();
  You can prevent that by tacking on `withoutOverlapping`
  
 ```php
-$shortSchedule->command('artisan-command')->everySecond()->withoutOverlapping();
+ShortSchedule::command('artisan-command')->everySecond()->withoutOverlapping();
 ```
  
  ### Between time constraints
@@ -141,13 +168,13 @@ $shortSchedule->command('artisan-command')->everySecond()->withoutOverlapping();
  Limit the task to run between start and end times.
  
  ```php
- $shortSchedule->command('artisan-command')->between('09:00', '17:00')->everySecond();
+ShortSchedule::command('artisan-command')->between('09:00', '17:00')->everySecond();
  ```
 
 It is safe use overflow days. In this example the command will run on every second between 21:00 and 01:00
 
  ```php
- $shortSchedule->command('artisan-command')->between('21:00', '01:00')->everySecond();
+ShortSchedule::command('artisan-command')->between('21:00', '01:00')->everySecond();
  ```
  
  ### Truth test constraints
@@ -155,7 +182,7 @@ It is safe use overflow days. In this example the command will run on every seco
  The command will run if the given closure return a truthy value. The closure will be evaluated at the same frequency the command is scheduled. So if you schedule the command to run every second, the given closure will also run every second.
  
 ```php
-$shortSchedule->command('artisan-command')->when(fn() => rand() %2)->everySecond();
+ShortSchedule::command('artisan-command')->when(fn() => rand() %2)->everySecond();
 ```
 
  ### Environment constraints
@@ -163,13 +190,13 @@ $shortSchedule->command('artisan-command')->when(fn() => rand() %2)->everySecond
  The command will only run on the given environment.
  
  ```php
- $shortSchedule->command('artisan-command')->environments('production')->everySecond();
+ShortSchedule::command('artisan-command')->environments('production')->everySecond();
  ```
 
 You can also pass an array:
 
  ```php
- $shortSchedule->command('artisan-command')->environments(['staging', 'production'])->everySecond();
+ShortSchedule::command('artisan-command')->environments(['staging', 'production'])->everySecond();
  ```
 
 ### Composite constraints
@@ -177,8 +204,7 @@ You can also pass an array:
 You can use all constraints mentioned above at once. The command will only execute if all the used constraints pass.
 
  ```php
- $shortSchedule
-   ->command('artisan-command')
+ShortSchedule::command('artisan-command')
    ->between('09:00', '17:00')
    ->when($callable)
    ->everySecond();
@@ -189,7 +215,7 @@ You can use all constraints mentioned above at once. The command will only execu
 Commands won't run whilst Laravel is in maintenance mode. If you would like to force a command to run in maintenance mode you can use the `runInMaintenanceMode` method. 
 
 ```php
-$shortSchedule->command('artisan-command')->everySecond()->runInMaintenanceMode();
+ShortSchedule::command('artisan-command')->everySecond()->runInMaintenanceMode();
 ```
 
 ### Running Tasks On One Server
@@ -197,7 +223,7 @@ $shortSchedule->command('artisan-command')->everySecond()->runInMaintenanceMode(
 Limit commands to only run on one server at a time. 
 
 ```php
-$shortSchedule->command('artisan-command')->everySecond()->onOneServer();
+ShortSchedule::command('artisan-command')->everySecond()->onOneServer();
 ```
 
 ## Events

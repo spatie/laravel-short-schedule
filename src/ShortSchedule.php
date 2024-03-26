@@ -4,6 +4,7 @@ namespace Spatie\ShortSchedule;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Traits\Macroable;
+use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use ReflectionClass;
 
@@ -19,7 +20,14 @@ class ShortSchedule
 
     public function __construct(LoopInterface $loop)
     {
+        $this->useLoop($loop);
+    }
+
+    public function useLoop(LoopInterface $loop): self
+    {
         $this->loop = $loop;
+
+        return $this;
     }
 
     public function command(string $command): PendingShortScheduleCommand
@@ -40,7 +48,7 @@ class ShortSchedule
         return $pendingCommand;
     }
 
-    public function registerCommands(): self
+    public function registerCommandsFromConsoleKernel(): self
     {
         $kernel = app(Kernel::class);
 

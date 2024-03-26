@@ -4,11 +4,23 @@ namespace Spatie\ShortSchedule\Tests\Feature;
 
 use Illuminate\Support\Facades\Cache;
 use Spatie\ShortSchedule\ShortSchedule;
+use Spatie\ShortSchedule\Facades\ShortSchedule as ShortScheduleFacade;
 use Spatie\ShortSchedule\Tests\TestCase;
 use Spatie\ShortSchedule\Tests\TestClasses\TestKernel;
 
 class ShortScheduleTest extends TestCase
 {
+    /** @test */
+    public function it_will_execute_a_command_registered_via_the_facade()
+    {
+        ShortScheduleFacade::exec("echo 'called' >> '{$this->getTempFilePath()}'")
+            ->everySeconds(0.05);
+
+        $this
+            ->runShortScheduleForSeconds(0.14)
+            ->assertTempFileContains('called', 2);
+    }
+
     /** @test */
     public function it_will_execute_registered_command_in_the_shortSchedule_method_of_the_kernel()
     {

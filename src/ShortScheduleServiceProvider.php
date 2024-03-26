@@ -2,17 +2,29 @@
 
 namespace Spatie\ShortSchedule;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Application;
+use React\EventLoop\Loop;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\ShortSchedule\Commands\ShortScheduleRunCommand;
 
-class ShortScheduleServiceProvider extends ServiceProvider
+class ShortScheduleServiceProvider extends PackageServiceProvider
 {
-    public function boot()
+    public function configurePackage(Package $package): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                ShortScheduleRunCommand::class,
-            ]);
-        }
+        $package
+            ->name('laravel-short-schedule')
+            ->hasCommand(ShortScheduleRunCommand::class);
+    }
+
+    public function bootingPackage()
+    {
+        $this->app->singleton(
+            ShortSchedule::class,
+            function () {
+                $loop = Loop::get();
+
+                return new ShortSchedule($loop);
+            });
     }
 }

@@ -8,4 +8,5 @@ coverage
 .php_cs.cache
 tests/temp
 .php-cs-fixer.cache
+.phpunit.cache
 

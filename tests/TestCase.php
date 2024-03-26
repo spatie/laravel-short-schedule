@@ -5,6 +5,7 @@ namespace Spatie\ShortSchedule\Tests;
 use Illuminate\Contracts\Console\Kernel;
 use Orchestra\Testbench\TestCase as Orchestra;
 use React\EventLoop\Factory;
+use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use Spatie\ShortSchedule\ShortSchedule;
 use Spatie\ShortSchedule\ShortScheduleServiceProvider;
@@ -42,7 +43,7 @@ class TestCase extends Orchestra
 
     public function getLoopThatStopsAfterSeconds(float $stopAfterSeconds): LoopInterface
     {
-        $loop = Factory::create();
+        $loop = Loop::get();
 
         $loop->addTimer($stopAfterSeconds, function () use ($loop) {
             $loop->stop();
@@ -75,7 +76,10 @@ class TestCase extends Orchestra
     {
         $loop = $this->getLoopThatStopsAfterSeconds($seconds);
 
-        (new ShortSchedule($loop))->registerCommands()->run();
+        app(ShortSchedule::class)
+            ->useLoop($loop)
+            ->registerCommandsFromConsoleKernel()
+            ->run();
 
         return $this;
     }
