@@ -3,8 +3,6 @@
 namespace Spatie\ShortSchedule\Commands;
 
 use Illuminate\Console\Command;
-use React\EventLoop\Factory;
-use React\EventLoop\Loop;
 use Spatie\ShortSchedule\ShortSchedule;
 
 class ShortScheduleRunCommand extends Command

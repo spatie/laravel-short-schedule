@@ -2,7 +2,6 @@
 
 namespace Spatie\ShortSchedule;
 
-use Illuminate\Foundation\Application;
 use React\EventLoop\Loop;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -25,6 +24,7 @@ class ShortScheduleServiceProvider extends PackageServiceProvider
                 $loop = Loop::get();
 
                 return new ShortSchedule($loop);
-            });
+            }
+        );
     }
 }

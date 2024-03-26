@@ -3,8 +3,8 @@
 namespace Spatie\ShortSchedule\Tests\Feature;
 
 use Illuminate\Support\Facades\Cache;
-use Spatie\ShortSchedule\ShortSchedule;
 use Spatie\ShortSchedule\Facades\ShortSchedule as ShortScheduleFacade;
+use Spatie\ShortSchedule\ShortSchedule;
 use Spatie\ShortSchedule\Tests\TestCase;
 use Spatie\ShortSchedule\Tests\TestClasses\TestKernel;
 

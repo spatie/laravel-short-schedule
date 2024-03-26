@@ -4,7 +4,6 @@ namespace Spatie\ShortSchedule;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Traits\Macroable;
-use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use ReflectionClass;
 

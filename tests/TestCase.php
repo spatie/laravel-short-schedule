@@ -4,7 +4,6 @@ namespace Spatie\ShortSchedule\Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Orchestra\Testbench\TestCase as Orchestra;
-use React\EventLoop\Factory;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use Spatie\ShortSchedule\ShortSchedule;
