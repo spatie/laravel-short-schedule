@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.6.0 - 2024-03-27
+
+- add `ShortSchedule` facade
+
+**Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.5.2...1.6.0
+
 ## 1.5.2 - 2024-03-07
 
 ### What's Changed
