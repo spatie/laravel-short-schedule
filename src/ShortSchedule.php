@@ -6,6 +6,7 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Traits\Macroable;
 use React\EventLoop\LoopInterface;
 use ReflectionClass;
+use ReflectionException;
 
 class ShortSchedule
 {
@@ -53,7 +54,12 @@ class ShortSchedule
 
         $class = new ReflectionClass(get_class($kernel));
 
-        $shortScheduleMethod = $class->getMethod('shortSchedule');
+        try {
+            $shortScheduleMethod = $class->getMethod('shortSchedule');
+        } catch (ReflectionException) {
+            // The application does not have a shortSchedule method
+            return $this;
+        }
 
         $shortScheduleMethod->setAccessible(true);
 
