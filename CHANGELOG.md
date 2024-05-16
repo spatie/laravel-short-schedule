@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.6.1 - 2024-05-16
+
+- do not fail if shortScheduel is not defined
+
+**Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.6.0...1.6.1
+
 ## 1.6.0 - 2024-03-27
 
 - add `ShortSchedule` facade
