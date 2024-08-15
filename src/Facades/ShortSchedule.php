@@ -5,11 +5,11 @@ namespace Spatie\ShortSchedule\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static useLoop(\React\EventLoop\LoopInterface $loop): \Spatie\ShortSchedule\ShortSchedule
- * @method static command(string $command): \Spatie\ShortSchedule\PendingShortScheduleCommand
- * @method static exec(string $command): \Spatie\ShortSchedule\PendingShortScheduleCommand
- * @method static registerCommandsFromConsoleKernel(): \Spatie\ShortSchedule\ShortSchedule
- * @method static run(?int $lifetime = null): void
+ * @method static \Spatie\ShortSchedule\ShortSchedule useLoop(\React\EventLoop\LoopInterface $loop)
+ * @method static \Spatie\ShortSchedule\PendingShortScheduleCommand command(string $command)
+ * @method static \Spatie\ShortSchedule\PendingShortScheduleCommand exec(string $command)
+ * @method static \Spatie\ShortSchedule\ShortSchedule registerCommandsFromConsoleKernel()
+ * @method static void run(?int $lifetime = null)
  */
 class ShortSchedule extends Facade
 {
