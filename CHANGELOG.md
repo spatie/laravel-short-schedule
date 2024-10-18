@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.6.2 - 2024-10-18
+
+### What's Changed
+
+* Added facade class docblock with static methods by @ariddlestone in https://github.com/spatie/laravel-short-schedule/pull/95
+
+### New Contributors
+
+* @ariddlestone made their first contribution in https://github.com/spatie/laravel-short-schedule/pull/95
+
+**Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.6.1...1.6.2
+
 ## 1.6.1 - 2024-05-16
 
 - do not fail if shortScheduel is not defined
