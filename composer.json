@@ -17,14 +17,14 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/cache": "^10|^11.0",
+        "illuminate/cache": "^10|^11.0|^12.0",
         "react/event-loop": "^1.5",
         "spatie/laravel-package-tools": "^1.16.4",
         "spatie/temporary-directory": "^2.2.1"
     },
     "require-dev": {
         "mockery/mockery": "^1.6.11",
-        "orchestra/testbench": "^8.0|^9.0.3",
+        "orchestra/testbench": "^8.0|^9.0.3|^10.0",
         "phpunit/phpunit": "^10.5.15",
         "spatie/test-time": "^1.3.3"
     },
