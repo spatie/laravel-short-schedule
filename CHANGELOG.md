@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.6.3 - 2025-04-09
+
+**Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.6.2...1.6.3
+
 ## 1.6.2 - 2024-10-18
 
 ### What's Changed
