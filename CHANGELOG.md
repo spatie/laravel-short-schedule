@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-short-schedule` will be documented in this file
 
+## 1.6.4 - 2025-07-28
+
+### What's Changed
+
+* Fix: Take spaces into consideration in php binary path by @daika7ana in https://github.com/spatie/laravel-short-schedule/pull/96
+
+### New Contributors
+
+* @daika7ana made their first contribution in https://github.com/spatie/laravel-short-schedule/pull/96
+
+**Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.6.3...1.6.4
+
 ## 1.6.3 - 2025-04-09
 
 **Full Changelog**: https://github.com/spatie/laravel-short-schedule/compare/1.6.2...1.6.3
