@@ -41,7 +41,7 @@ class PendingShortScheduleCommand
             $artisanCommand = app($artisanCommand)->getName();
         }
 
-        $this->command = PHP_BINARY . " artisan {$artisanCommand}";
+        $this->command = '"' . PHP_BINARY . "\" artisan {$artisanCommand}";
 
         return $this;
     }

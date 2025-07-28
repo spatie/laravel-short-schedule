@@ -20,7 +20,8 @@ class PendingShortScheduleCommandTest extends Orchestra
         $commandProperty->setAccessible(true);
 
         $artisanCommand = 'test-command';
-        $this->assertEquals(PHP_BINARY . " artisan {$artisanCommand}", $commandProperty->getValue($pendingCommand));
+
+        $this->assertEquals('"' . PHP_BINARY . "\" artisan {$artisanCommand}", $commandProperty->getValue($pendingCommand));
     }
 }
 
