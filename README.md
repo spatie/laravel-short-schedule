@@ -44,6 +44,21 @@ protected function shortSchedule(\Spatie\ShortSchedule\ShortSchedule $shortSched
 }
 ```
 
+## How it works
+
+The `short-schedule:run` command starts a single long-running process powered by a [ReactPHP](https://reactphp.org) event loop. That process is entirely separate from Laravel's native scheduler (`schedule:run`), so your short scheduled tasks never delay, or get delayed by, your regular schedule.
+
+Inside the loop, every scheduled command gets its own periodic timer. When a timer fires, the command is launched as an independent background process using the non-blocking `start()` method of `Symfony\Component\Process`. The loop does not wait for that process to finish. It immediately continues handling the other timers.
+
+Because each command runs in its own process, a slow task does not hold up the rest of your short schedule. This is a notable difference with the native sub-minute scheduler, which by default runs tasks sequentially in the foreground, where a single long-running task can delay every task defined after it.
+
+A few things do run inside the loop itself, and so will block it when they are slow:
+
+- the constraints you add (such as `when` and `between`), which are evaluated on every tick
+- any listeners for the [events](#events) described below
+
+Keep those fast, and offload any heavy work to a queue.
+
 ## Are you a visual learner?
 
 In [this video](https://spatie.be/videos/laravel-package-training/laravel-short-schedule-part-1-using-the-package) you'll see a demonstration of the package. 
@@ -87,16 +102,6 @@ php artisan short-schedule:run --lifetime=60 // after 1 minute the worker will b
 ```
 
 After the given amount of seconds, the worker and all it's child processes will be terminated, freeing all memory. Then supervisor (or similar watcher) will bring it back.
-
-### Lumen
-
-Before you can run the `php artisan short-schedule:run` command in your Lumen project, you should make a copy of the `ShortScheduleRunCommand` into your `app/Commands` folder:
-
-```bash
-cp ./vendor/spatie/laravel-short-schedule/src/Commands/ShortScheduleRunCommand.php ./app/Console/Commands/ShortScheduleRunCommand.php
-```
-
-Next, edit the new `ShortScheduleRunCommand.php` file, and change the namespace from `namespace Spatie\ShortSchedule\Commands;` to `namespace App\Console\Commands;` and you're good to go!
 
 ## Usage
 
