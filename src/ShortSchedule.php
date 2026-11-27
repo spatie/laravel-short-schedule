@@ -68,7 +68,7 @@ class ShortSchedule
         return $this;
     }
 
-    public function run(int $lifetime = null): void
+    public function run(?int $lifetime = null): void
     {
         if (! is_null($lifetime)) {
             $this->lifetime = $lifetime;
